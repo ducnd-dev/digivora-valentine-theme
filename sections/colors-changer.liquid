@@ -1,0 +1,131 @@
+{% style %}
+{% for scheme in settings.color_schemes %}
+  .color-{{ scheme.id }} {
+    --color-foreground: {{ section.settings.text.red }},{{ section.settings.text.green }},{{ section.settings.text.blue }};
+    --color-shadow: {{ section.settings.shadow.red }},{{ section.settings.shadow.green }},{{ section.settings.shadow.blue }};
+    --color-button: {{ section.settings.button.red }},{{ section.settings.button.green }},{{ section.settings.button.blue }};
+    --color-button-text: {{ section.settings.button_label.red }},{{ section.settings.button_label.green }},{{ section.settings.button_label.blue }};
+    --color-secondary-button: {{ section.settings.outline_button.red }},{{ section.settings.outline_button.green }},{{ section.settings.outline_button.blue }};
+    --color-secondary-button-text: {{ section.settings.outline_button_label.red }},{{ section.settings.outline_button_label.green }},{{ section.settings.outline_button_label.blue }};
+  }
+{% endfor %}
+.color- {
+  --color-foreground: {{ section.settings.text.red }},{{ section.settings.text.green }},{{ section.settings.text.blue }};
+  --color-shadow: {{ section.settings.shadow.red }},{{ section.settings.shadow.green }},{{ section.settings.shadow.blue }};
+  --color-button: {{ section.settings.button.red }},{{ section.settings.button.green }},{{ section.settings.button.blue }};
+  --color-button-text: {{ section.settings.button_label.red }},{{ section.settings.button_label.green }},{{ section.settings.button_label.blue }};
+  --color-secondary-button: {{ section.settings.outline_button.red }},{{ section.settings.outline_button.green }},{{ section.settings.outline_button.blue }};
+  --color-secondary-button-text: {{ section.settings.outline_button.red }},{{ section.settings.outline_button.green }},{{ section.settings.outline_button.blue }};
+}
+.section-divider svg {
+  color: {{ section.settings.accent }} !important;
+}
+.comparison-table__row-name.highlighted-cell {
+  background: {{ section.settings.accent }};
+}
+.footer,
+.footer h2,
+.footer a.link,
+.utility-bar,
+.badge,
+.announcement-bar__message span,
+span.header__active-menu-item {
+  background-color: {{ section.settings.accent }};
+  color: {{ section.settings.accent_text }};
+}
+
+span.header__active-menu-item {
+  background-color: {{ section.settings.accent }} !important;
+  color: {{ section.settings.accent_text }} !important;
+}
+
+.countdown::after,
+.countdown strong {
+  color: {{ section.settings.accent_text }};
+}
+
+cart-remove-button button svg {
+  color: #000 !important;
+}
+
+{% endstyle %}
+
+{% schema %}
+{
+  "name": "Store colors changer",
+  "limit": 1,
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "This section is used to change your global store colors on THIS PAGE ONLY."
+    },
+    {
+      "type": "header",
+      "content": "IMPORTANT"
+    },
+    {
+      "type": "paragraph",
+      "content": "Place this section on top of the list of your added sections to avoid any delays in loading of the changed colors."
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "accent",
+      "label": "Accent",
+      "default": "#8472ED"
+    },
+    {
+      "type": "color",
+      "id": "accent_text",
+      "label": "Accent text",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "id": "text",
+      "label": "Text",
+      "default": "#212240"
+    },
+    {
+      "type": "color",
+      "id": "button",
+      "label": "Solid button background",
+      "default": "#8472ED"
+    },
+    {
+      "type": "color",
+      "id": "button_label",
+      "label": "Solid button label",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "id": "outline_button",
+      "label": "Secondary button",
+      "default": "#8472ED"
+    },
+    {
+      "type": "color",
+      "id": "outline_button_label",
+      "label": "Secondary button label",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "id": "shadow",
+      "label": "Shadow"
+    }
+  ],
+  "enabled_on": {
+    "templates": ["product"]
+  },
+  "presets": [
+    {
+      "name": "Store colors changer"
+    }
+  ]
+}
+{% endschema %}
