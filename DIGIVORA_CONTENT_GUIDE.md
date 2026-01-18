@@ -388,6 +388,6 @@ To customize further:
 
 ---
 
-**Theme Version**: Zendrop v1.1.0  
+**Theme Version**: Digivora v1.1.0  
 **Last Updated**: January 2026  
 **Contact**: support@digivora.co

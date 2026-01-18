@@ -1,11 +1,11 @@
 [
   {
     "name": "theme_info",
-    "theme_name": "Zendrop",
+    "theme_name": "Digivora",
     "theme_version": "1.1.0",
-    "theme_author": "Shopify",
-    "theme_documentation_url": "https:\/zendrop.com\/",
-    "theme_support_url": "https:\/\/zendrop.com\/"
+    "theme_author": "Digivora",
+    "theme_documentation_url": "https:\/\/digivora.co",
+    "theme_support_url": "https:\/\/digivora.co"
   },
   {
     "name": "t:settings_schema.logo.name",

@@ -1,8 +1,8 @@
-# Zendrop Shopify Theme - AI Coding Instructions
+# Digivora Shopify Theme - AI Coding Instructions
 
 ## Architecture Overview
 
-This is a **Shopify 2.0 theme** (Zendrop v1.1.0) following Shopify's standard Liquid templating architecture with modular sections and reusable snippets.
+This is a **Shopify 2.0 theme** (Digivora v1.1.0) following Shopify's standard Liquid templating architecture with modular sections and reusable snippets.
 
 ### Directory Structure
 - **`sections/`** - Modular, customizable sections with JSON schemas (e.g., `main-product.liquid`, `header.liquid`)

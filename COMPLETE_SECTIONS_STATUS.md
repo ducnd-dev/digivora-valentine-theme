@@ -213,7 +213,7 @@ These sections pull data directly from Shopify and don't need custom defaults:
 
 ### If You Need Help:
 1. **Shopify Help**: help.shopify.com
-2. **Theme Documentation**: Zendrop theme docs
+2. **Theme Documentation**: Digivora theme docs
 3. **Community**: Shopify Community forums
 
 ### Marketing Resources Created:

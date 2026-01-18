@@ -356,5 +356,5 @@ linear-gradient(135deg, #FAFAFA 0%, #EEEEEE 100%)
 ---
 
 *Last Updated: January 17, 2026*  
-*Theme: Zendrop v1.1.0*  
+*Theme: Digivora v1.1.0*  
 *Campaign: Valentine's Day 2026*
