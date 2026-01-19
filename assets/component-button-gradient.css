@@ -28,7 +28,8 @@
 /* Secondary Button with Gradient Border */
 .button--secondary {
   background: transparent !important;
-  color: rgb(236, 72, 153) !important;
+  color: rgb(219, 39, 119) !important; /* Darker pink for better contrast */
+  font-weight: 600;
   position: relative;
   z-index: 0;
 }
@@ -57,13 +58,15 @@
   opacity: 0;
 }
 
-/* Tertiary Button - Keep Simple */
+/* Tertiary Button - Better Contrast */
 .button--tertiary {
-  color: rgb(99, 102, 241) !important;
+  color: rgb(79, 70, 229) !important; /* Darker indigo for better contrast */
+  font-weight: 600;
 }
 
 .button--tertiary:hover {
-  background: rgba(99, 102, 241, 0.1) !important;
+  background: rgba(79, 70, 229, 0.1) !important;
+  color: rgb(67, 56, 202) !important; /* Even darker on hover */
 }
 
 /* Loading State */
