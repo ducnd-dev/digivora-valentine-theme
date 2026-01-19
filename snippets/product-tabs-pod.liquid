@@ -1,0 +1,241 @@
+{% comment %}
+  POD Product Tabs
+  Displays: Description, Specifications, Shipping & Returns, Care Instructions, Reviews
+  
+  Usage: {% render 'product-tabs-pod', product: product, description: product.description %}
+{% endcomment %}
+
+<div class="product-tabs-pod">
+  <div class="tabs-navigation">
+    <button class="tab-button active" data-tab="description">Description</button>
+    <button class="tab-button" data-tab="specifications">Specifications</button>
+    <button class="tab-button" data-tab="shipping">Shipping & Returns</button>
+    <button class="tab-button" data-tab="care">Care Instructions</button>
+    <button class="tab-button" data-tab="reviews">Reviews (247)</button>
+  </div>
+
+  <div class="tabs-content">
+    {%- comment -%} Tab 1: Description {%- endcomment -%}
+    <div class="tab-panel active" id="tab-description">
+      <div class="tab-description">
+        {%- if product.description != blank -%}
+          {{ product.description }}
+        {%- else -%}
+          <p>This premium print-on-demand product is custom-made just for you. Each item is printed with high-quality, eco-friendly inks that ensure vibrant colors and long-lasting durability.</p>
+          <ul>
+            <li>Custom printed design</li>
+            <li>Premium quality materials</li>
+            <li>Eco-friendly production process</li>
+            <li>Made to order - reducing waste</li>
+          </ul>
+        {%- endif -%}
+      </div>
+    </div>
+
+    {%- comment -%} Tab 2: Specifications {%- endcomment -%}
+    <div class="tab-panel" id="tab-specifications">
+      <div class="specifications-grid">
+        <div class="spec-item">
+          <strong>Material:</strong>
+          <span>100% Cotton / Premium Blend</span>
+        </div>
+        <div class="spec-item">
+          <strong>Print Method:</strong>
+          <span>Direct-to-Garment (DTG) / Sublimation</span>
+        </div>
+        <div class="spec-item">
+          <strong>Print Quality:</strong>
+          <span>4800 DPI - Professional Quality</span>
+        </div>
+        <div class="spec-item">
+          <strong>Fit:</strong>
+          <span>Classic Fit / True to Size</span>
+        </div>
+        <div class="spec-item">
+          <strong>Weight:</strong>
+          <span>180-200 GSM</span>
+        </div>
+        <div class="spec-item">
+          <strong>Made In:</strong>
+          <span>Printed & shipped from USA/EU</span>
+        </div>
+        <div class="spec-item">
+          <strong>Sustainability:</strong>
+          <span>Eco-friendly inks, made-to-order production</span>
+        </div>
+        <div class="spec-item">
+          <strong>Customization:</strong>
+          <span>Personalized just for you</span>
+        </div>
+      </div>
+    </div>
+
+    {%- comment -%} Tab 3: Shipping & Returns {%- endcomment -%}
+    <div class="tab-panel" id="tab-shipping">
+      <div class="shipping-info">
+        <div class="info-section">
+          <h3>📦 Shipping Information</h3>
+          <ul>
+            <li><strong>Processing Time:</strong> 2-4 business days (made to order)</li>
+            <li><strong>Domestic Shipping:</strong> 3-7 business days (Free on orders $50+)</li>
+            <li><strong>International Shipping:</strong> 7-14 business days</li>
+            <li><strong>Tracking:</strong> Provided for all orders</li>
+            <li><strong>Express Shipping:</strong> Available at checkout</li>
+          </ul>
+        </div>
+        
+        <div class="info-section">
+          <h3>🔄 Return Policy</h3>
+          <ul>
+            <li><strong>30-Day Returns:</strong> Free returns within 30 days</li>
+            <li><strong>Quality Guarantee:</strong> 100% satisfaction or money back</li>
+            <li><strong>Defects:</strong> Free replacement for manufacturing defects</li>
+            <li><strong>Size Issues:</strong> Easy exchanges available</li>
+            <li><strong>Custom Items:</strong> Returns accepted if quality issues occur</li>
+          </ul>
+          <p class="note">💡 <strong>Note:</strong> Since items are made to order, we can't accept returns for change of mind unless there's a quality issue.</p>
+        </div>
+      </div>
+    </div>
+
+    {%- comment -%} Tab 4: Care Instructions {%- endcomment -%}
+    <div class="tab-panel" id="tab-care">
+      <div class="care-instructions">
+        <div class="care-grid">
+          <div class="care-item">
+            <span class="care-icon">🧺</span>
+            <h4>Washing</h4>
+            <p>Machine wash cold (30°C max) with like colors. Turn garment inside out before washing.</p>
+          </div>
+          <div class="care-item">
+            <span class="care-icon">🌡️</span>
+            <h4>Drying</h4>
+            <p>Tumble dry low or hang to dry. Avoid high heat to preserve print quality.</p>
+          </div>
+          <div class="care-item">
+            <span class="care-icon">👕</span>
+            <h4>Ironing</h4>
+            <p>Iron inside out on low heat. Do not iron directly on the print.</p>
+          </div>
+          <div class="care-item">
+            <span class="care-icon">❌</span>
+            <h4>Avoid</h4>
+            <p>No bleach, no dry cleaning, no fabric softener. These can damage the print.</p>
+          </div>
+        </div>
+        
+        <div class="care-tips">
+          <h4>💡 Pro Tips for Long-Lasting Prints</h4>
+          <ul>
+            <li>Always wash inside out to protect the print</li>
+            <li>Use mild detergent without harsh chemicals</li>
+            <li>Avoid direct sunlight when drying</li>
+            <li>Don't wring or twist the garment</li>
+            <li>Store in a cool, dry place</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    {%- comment -%} Tab 5: Reviews {%- endcomment -%}
+    <div class="tab-panel" id="tab-reviews">
+      <div class="reviews-section" id="product-reviews">
+        <div class="reviews-summary">
+          <div class="summary-rating">
+            <span class="rating-big">4.8</span>
+            <div class="stars-big">★★★★★</div>
+            <span class="review-count">Based on 247 reviews</span>
+          </div>
+          
+          <div class="rating-breakdown">
+            <div class="rating-bar">
+              <span>5★</span>
+              <div class="bar"><div class="fill" style="width: 82%"></div></div>
+              <span>202</span>
+            </div>
+            <div class="rating-bar">
+              <span>4★</span>
+              <div class="bar"><div class="fill" style="width: 12%"></div></div>
+              <span>30</span>
+            </div>
+            <div class="rating-bar">
+              <span>3★</span>
+              <div class="bar"><div class="fill" style="width: 4%"></div></div>
+              <span>10</span>
+            </div>
+            <div class="rating-bar">
+              <span>2★</span>
+              <div class="bar"><div class="fill" style="width: 1%"></div></div>
+              <span>3</span>
+            </div>
+            <div class="rating-bar">
+              <span>1★</span>
+              <div class="bar"><div class="fill" style="width: 1%"></div></div>
+              <span>2</span>
+            </div>
+          </div>
+        </div>
+
+        {%- comment -%} Sample reviews {%- endcomment -%}
+        <div class="reviews-list">
+          <div class="review-item">
+            <div class="review-header">
+              <div class="review-stars">★★★★★</div>
+              <span class="review-author">Sarah M.</span>
+              <span class="review-date">2 days ago</span>
+            </div>
+            <h4 class="review-title">Amazing quality!</h4>
+            <p class="review-text">The print quality is outstanding! Colors are vibrant and exactly as shown. The fabric is soft and comfortable. Will definitely order again.</p>
+            <span class="verified-badge">✓ Verified Purchase</span>
+          </div>
+
+          <div class="review-item">
+            <div class="review-header">
+              <div class="review-stars">★★★★★</div>
+              <span class="review-author">Michael R.</span>
+              <span class="review-date">1 week ago</span>
+            </div>
+            <h4 class="review-title">Perfect fit and great design</h4>
+            <p class="review-text">Ordered a Large based on the size guide and it fits perfectly. The design looks even better in person. Fast shipping too!</p>
+            <span class="verified-badge">✓ Verified Purchase</span>
+          </div>
+
+          <div class="review-item">
+            <div class="review-header">
+              <div class="review-stars">★★★★☆</div>
+              <span class="review-author">Emily L.</span>
+              <span class="review-date">2 weeks ago</span>
+            </div>
+            <h4 class="review-title">Great product, slight delay</h4>
+            <p class="review-text">Love the quality and design! Shipping took a bit longer than expected, but worth the wait. The custom print is flawless.</p>
+            <span class="verified-badge">✓ Verified Purchase</span>
+          </div>
+        </div>
+
+        <button class="button button--secondary load-more-reviews">Load More Reviews</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Tab switching functionality
+  document.addEventListener('DOMContentLoaded', function() {
+    const tabButtons = document.querySelectorAll('.product-tabs-pod .tab-button');
+    const tabPanels = document.querySelectorAll('.product-tabs-pod .tab-panel');
+    
+    tabButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        const targetTab = button.dataset.tab;
+        
+        // Remove active class from all buttons and panels
+        tabButtons.forEach(btn => btn.classList.remove('active'));
+        tabPanels.forEach(panel => panel.classList.remove('active'));
+        
+        // Add active class to clicked button and corresponding panel
+        button.classList.add('active');
+        document.getElementById('tab-' + targetTab).classList.add('active');
+      });
+    });
+  });
+</script>

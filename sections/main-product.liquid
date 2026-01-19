@@ -634,6 +634,9 @@
     {%- comment -%} POD Size Guide Modal {%- endcomment -%}
     {% render 'size-guide-modal-pod' %}
 
+    {%- comment -%} POD Product Tabs {%- endcomment -%}
+    {% render 'product-tabs-pod', product: product, description: product.description %}
+
     {% render 'product-media-modal', variant_images: variant_images %}
 
     {% assign popups = section.blocks | where: 'type', 'popup' %}
