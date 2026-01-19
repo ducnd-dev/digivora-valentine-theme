@@ -28,7 +28,7 @@
   border-bottom: 3px solid transparent;
   font-size: 15px;
   font-weight: 600;
-  color: rgba(var(--color-foreground), 0.6);
+  color: rgb(var(--color-foreground));
   cursor: pointer;
   transition: all 0.3s ease;
   white-space: nowrap;
@@ -325,7 +325,7 @@
 
 .review-date {
   font-size: 13px;
-  color: rgba(var(--color-foreground), 0.6);
+  color: rgba(var(--color-foreground), 0.85);
   margin-left: auto;
 }
 

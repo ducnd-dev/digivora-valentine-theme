@@ -155,7 +155,7 @@
 
 .card__information .price__compare {
   font-size: 14px;
-  color: rgba(var(--color-foreground), 0.5);
+  color: rgba(var(--color-foreground), 0.7);
   text-decoration: line-through;
 }
 

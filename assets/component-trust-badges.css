@@ -59,7 +59,7 @@
 
 .trust-badge__text {
   font-size: 12px;
-  color: rgba(var(--color-foreground), 0.7);
+  color: rgba(var(--color-foreground), 0.85);
   line-height: 1.3;
 }
 
