@@ -407,7 +407,12 @@
       <script src="{{ 'predictive-search.js' | asset_url }}" defer="defer"></script>
     {%- endif -%}
     
-    {%- comment -%} POD Recently Viewed Products {%- endcomment -%}
+    {%- comment -%} POD Week 3 & 4 Components {%- endcomment -%}
     <script src="{{ 'recently-viewed-pod.js' | asset_url }}" defer="defer"></script>
+    <script src="{{ 'mobile-touch-enhancements.js' | asset_url }}" defer="defer"></script>
+    {% render 'lazy-load-images-pod' %}
+    
+    {%- comment -%} Mobile Bottom Navigation {%- endcomment -%}
+    {% render 'mobile-bottom-nav-pod' %}
   </body>
 </html>
