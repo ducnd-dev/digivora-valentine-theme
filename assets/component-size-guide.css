@@ -1,0 +1,180 @@
+/* ============================================
+   SIZE GUIDE MODAL - POD
+   ============================================ */
+
+.size-guide-modal .modal__content {
+  max-width: 800px;
+  width: 90vw;
+  max-height: 90vh;
+  overflow-y: auto;
+  background: rgb(var(--color-background));
+  border-radius: 12px;
+  padding: 0;
+}
+
+.size-guide-modal .modal__content-inner {
+  padding: 2rem 1.5rem;
+}
+
+.size-guide__title {
+  font-size: 28px;
+  font-weight: 700;
+  margin: 0 0 2rem 0;
+  color: rgb(var(--color-foreground));
+}
+
+.size-chart-section {
+  margin-bottom: 2.5rem;
+}
+
+.size-chart-subtitle {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  color: rgb(var(--color-foreground));
+}
+
+.size-chart-table-wrapper {
+  overflow-x: auto;
+  border-radius: 8px;
+  border: 1px solid rgba(var(--color-foreground), 0.1);
+}
+
+.size-chart-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+.size-chart-table thead {
+  background-color: rgba(99, 102, 241, 0.05);
+}
+
+.size-chart-table th {
+  padding: 0.75rem 1rem;
+  text-align: left;
+  font-weight: 600;
+  border-bottom: 2px solid rgba(var(--color-foreground), 0.1);
+  color: rgb(var(--color-foreground));
+}
+
+.size-chart-table td {
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid rgba(var(--color-foreground), 0.05);
+}
+
+.size-chart-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.size-chart-table tbody tr:hover {
+  background-color: rgba(99, 102, 241, 0.03);
+}
+
+/* Measurement Instructions */
+.size-guide-instructions {
+  margin-bottom: 2rem;
+}
+
+.measurement-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.5rem;
+  margin-top: 1rem;
+}
+
+.measurement-item {
+  display: flex;
+  gap: 1rem;
+  padding: 1.25rem;
+  background-color: rgba(99, 102, 241, 0.03);
+  border-radius: 8px;
+  border: 1px solid rgba(99, 102, 241, 0.1);
+}
+
+.measurement-icon {
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+  color: rgb(99, 102, 241);
+}
+
+.measurement-content {
+  flex: 1;
+}
+
+.measurement-content strong {
+  display: block;
+  font-size: 15px;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: rgb(var(--color-foreground));
+}
+
+.measurement-content p {
+  font-size: 13px;
+  color: rgba(var(--color-foreground), 0.7);
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* Note */
+.size-guide-note {
+  display: flex;
+  gap: 0.75rem;
+  padding: 1.25rem;
+  background-color: rgba(236, 72, 153, 0.05);
+  border-left: 3px solid rgb(236, 72, 153);
+  border-radius: 6px;
+}
+
+.size-guide-note svg {
+  flex-shrink: 0;
+  color: rgb(236, 72, 153);
+}
+
+.size-guide-note p {
+  font-size: 13px;
+  line-height: 1.6;
+  margin: 0;
+  color: rgb(var(--color-foreground));
+}
+
+/* Mobile optimization */
+@media screen and (max-width: 749px) {
+  .size-guide-modal .modal__content {
+    width: 100vw;
+    max-width: 100vw;
+    height: 100vh;
+    max-height: 100vh;
+    border-radius: 0;
+  }
+  
+  .size-guide-modal .modal__content-inner {
+    padding: 1.5rem 1rem;
+  }
+  
+  .size-guide__title {
+    font-size: 24px;
+  }
+  
+  .measurement-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .size-chart-table {
+    font-size: 12px;
+  }
+  
+  .size-chart-table th,
+  .size-chart-table td {
+    padding: 0.6rem 0.5rem;
+  }
+}
+
+/* Tablet */
+@media screen and (min-width: 750px) and (max-width: 989px) {
+  .measurement-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}

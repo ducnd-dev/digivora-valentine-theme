@@ -1,0 +1,138 @@
+{% comment %}
+  POD Size Guide Modal
+  Comprehensive size chart for apparel products
+  
+  Usage: {% render 'size-guide-modal-pod' %}
+{% endcomment %}
+
+<modal-dialog id="SizeGuideModal" class="size-guide-modal modal">
+  <div role="dialog" aria-labelledby="SizeGuideTitle" aria-modal="true" class="modal__content">
+    <button
+      id="ModalClose-SizeGuide"
+      type="button"
+      class="modal__close-button link link--text focus-inset"
+      aria-label="{{ 'accessibility.close' | t }}"
+    >
+      {% render 'icon-close' %}
+    </button>
+    
+    <div class="modal__content-inner">
+      <h2 id="SizeGuideTitle" class="size-guide__title">Size Guide</h2>
+      
+      {% comment %} T-Shirt Size Chart {% endcomment %}
+      <div class="size-chart-section">
+        <h3 class="size-chart-subtitle">Unisex T-Shirts & Apparel</h3>
+        <div class="size-chart-table-wrapper">
+          <table class="size-chart-table">
+            <thead>
+              <tr>
+                <th>Size</th>
+                <th>Chest (in)</th>
+                <th>Length (in)</th>
+                <th>Sleeve (in)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>XS</strong></td>
+                <td>31-34</td>
+                <td>26-27</td>
+                <td>7.5</td>
+              </tr>
+              <tr>
+                <td><strong>S</strong></td>
+                <td>34-37</td>
+                <td>27-28</td>
+                <td>8</td>
+              </tr>
+              <tr>
+                <td><strong>M</strong></td>
+                <td>38-41</td>
+                <td>29-30</td>
+                <td>8.5</td>
+              </tr>
+              <tr>
+                <td><strong>L</strong></td>
+                <td>42-45</td>
+                <td>31-32</td>
+                <td>9</td>
+              </tr>
+              <tr>
+                <td><strong>XL</strong></td>
+                <td>46-49</td>
+                <td>33-34</td>
+                <td>9.5</td>
+              </tr>
+              <tr>
+                <td><strong>2XL</strong></td>
+                <td>50-53</td>
+                <td>35-36</td>
+                <td>10</td>
+              </tr>
+              <tr>
+                <td><strong>3XL</strong></td>
+                <td>54-57</td>
+                <td>37-38</td>
+                <td>10.5</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      
+      {% comment %} How to Measure {% endcomment %}
+      <div class="size-guide-instructions">
+        <h3 class="size-chart-subtitle">How to Measure</h3>
+        <div class="measurement-grid">
+          <div class="measurement-item">
+            <div class="measurement-icon">
+              <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
+                <rect x="10" y="5" width="20" height="30" fill="none" stroke="currentColor" stroke-width="2"/>
+                <path d="M10 12H30" stroke="currentColor" stroke-width="1.5"/>
+                <path d="M20 5V12" stroke="currentColor" stroke-width="1.5" stroke-dasharray="2 2"/>
+              </svg>
+            </div>
+            <div class="measurement-content">
+              <strong>Chest</strong>
+              <p>Measure around the fullest part of your chest, keeping the tape horizontal.</p>
+            </div>
+          </div>
+          
+          <div class="measurement-item">
+            <div class="measurement-icon">
+              <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
+                <path d="M20 5V35" stroke="currentColor" stroke-width="2"/>
+                <path d="M15 5H25M15 35H25" stroke="currentColor" stroke-width="1.5"/>
+              </svg>
+            </div>
+            <div class="measurement-content">
+              <strong>Length</strong>
+              <p>Measure from the highest point of the shoulder to the desired hem length.</p>
+            </div>
+          </div>
+          
+          <div class="measurement-item">
+            <div class="measurement-icon">
+              <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
+                <path d="M10 20C10 20 15 10 25 10C35 10 35 20 35 20" stroke="currentColor" stroke-width="2" fill="none"/>
+                <path d="M25 10V25" stroke="currentColor" stroke-width="1.5" stroke-dasharray="2 2"/>
+              </svg>
+            </div>
+            <div class="measurement-content">
+              <strong>Sleeve</strong>
+              <p>Measure from center back neck to the end of the shoulder seam.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="size-guide-note">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+          <circle cx="10" cy="10" r="9" stroke="currentColor" stroke-width="2"/>
+          <path d="M10 6V10M10 14H10.01" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+        <p><strong>Note:</strong> Measurements may vary slightly by style. All measurements are approximate and in inches. For the best fit, we recommend measuring a similar garment you already own.</p>
+      </div>
+    </div>
+  </div>
+</modal-dialog>
