@@ -186,17 +186,30 @@
   border-radius: 12px;
   transition: all 0.3s ease;
   position: relative;
+  transform: translateZ(0);
 }
 
 .gift-option__checkbox:checked + .gift-option__card {
-  border-color: rgb(99, 102, 241);
-  background: rgba(99, 102, 241, 0.05);
+  border: 2px solid transparent;
+  background: var(--gradient-valentine-subtle);
+  box-shadow: 0 4px 16px rgba(236, 72, 153, 0.2);
+}
+
+/* Gradient border effect */
+.gift-option__checkbox:checked + .gift-option__card::before {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  background: var(--gradient-valentine);
+  border-radius: inherit;
+  z-index: -1;
+  opacity: 0.8;
 }
 
 .gift-option__card:hover {
-  border-color: rgb(99, 102, 241);
+  border-color: rgb(236, 72, 153);
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(99, 102, 241, 0.15);
+  box-shadow: 0 8px 16px rgba(236, 72, 153, 0.15);
 }
 
 .gift-option__icon {
@@ -247,7 +260,8 @@
 }
 
 .gift-option__checkbox:checked + .gift-option__card .gift-option__checkmark {
-  background: rgb(99, 102, 241);
+  background: var(--gradient-valentine);
+  box-shadow: 0 2px 8px rgba(236, 72, 153, 0.3);
 }
 
 /* Gift Message */

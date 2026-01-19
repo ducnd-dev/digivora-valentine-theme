@@ -94,44 +94,50 @@
     gap: 0.75rem;
     padding: 0.875rem 1rem;
     border-radius: 8px;
-    animation: slideInUp 0.4s ease;
+    animation: slideInUp 0.4s ease, gradient-pulse 3s ease-in-out infinite;
+    will-change: background;
+    transform: translateZ(0);
+  }
+
+  @keyframes gradient-pulse {
+    0%, 100% {
+      opacity: 1;
+      transform: scale(1);
+    }
+    50% {
+      opacity: 0.95;
+      transform: scale(1.01);
+    }
   }
 
   .urgency-indicator--stock {
-    background: rgba(245, 158, 11, 0.1);
-    border: 1px solid rgba(245, 158, 11, 0.3);
-    color: rgb(146, 64, 14);
+    background: var(--gradient-urgency);
+    border: none;
+    color: white;
+  }
+
+  .urgency-indicator--stock .urgency-indicator__icon {
+    color: white;
   }
 
   .urgency-indicator--viewers {
-    background: rgba(59, 130, 246, 0.1);
-    border: 1px solid rgba(59, 130, 246, 0.3);
-    color: rgb(30, 64, 175);
+    background: var(--gradient-primary);
+    border: none;
+    color: white;
     position: relative;
   }
 
   .urgency-indicator--purchase {
-    background: rgba(16, 185, 129, 0.1);
-    border: 1px solid rgba(16, 185, 129, 0.3);
-    color: rgb(6, 95, 70);
+    background: var(--gradient-success);
+    border: none;
+    color: white;
   }
 
   .urgency-indicator__icon {
     flex-shrink: 0;
     width: 20px;
     height: 20px;
-  }
-
-  .urgency-indicator--stock .urgency-indicator__icon {
-    color: rgb(245, 158, 11);
-  }
-
-  .urgency-indicator--viewers .urgency-indicator__icon {
-    color: rgb(59, 130, 246);
-  }
-
-  .urgency-indicator--purchase .urgency-indicator__icon {
-    color: rgb(16, 185, 129);
+    color: white;
   }
 
   .urgency-indicator__content {

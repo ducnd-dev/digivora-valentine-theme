@@ -4,12 +4,26 @@
 
 .hero-pod {
   padding: 4rem 0;
-  background: linear-gradient(135deg, 
-    rgba(99, 102, 241, 0.05) 0%, 
-    rgba(236, 72, 153, 0.05) 50%,
-    rgba(16, 185, 129, 0.05) 100%
-  );
+  background: 
+    var(--gradient-mesh),
+    var(--gradient-primary);
   overflow: hidden;
+  position: relative;
+}
+
+/* Animated gradient overlay */
+.hero-pod::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    45deg,
+    rgba(236, 72, 153, 0.1) 0%,
+    transparent 50%,
+    rgba(139, 92, 246, 0.1) 100%
+  );
+  animation: gradient-shift 8s ease-in-out infinite;
+  pointer-events: none;
 }
 
 .hero-pod__container {
@@ -31,12 +45,25 @@
   align-items: center;
   width: fit-content;
   padding: 0.5rem 1rem;
-  background-color: rgba(99, 102, 241, 0.1);
-  color: rgb(99, 102, 241);
+  background: var(--gradient-valentine-subtle);
+  color: rgb(236, 72, 153);
   border-radius: 50px;
   font-size: 14px;
   font-weight: 600;
-  border: 1px solid rgba(99, 102, 241, 0.2);
+  border: 1px solid rgba(236, 72, 153, 0.3);
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-pod__badge::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: var(--gradient-shimmer);
+  animation: shimmer 3s infinite;
 }
 
 .hero-pod__heading {
@@ -48,14 +75,28 @@
 }
 
 .hero-pod__heading--gradient {
-  background: linear-gradient(135deg, 
-    rgb(99, 102, 241) 0%, 
-    rgb(236, 72, 153) 50%,
-    rgb(16, 185, 129) 100%
+  background: linear-gradient(
+    90deg,
+    #6366F1 0%,
+    #EC4899 25%,
+    #8B5CF6 50%,
+    #6366F1 75%,
+    #EC4899 100%
   );
+  background-size: 200% auto;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+  animation: gradient-shift 4s linear infinite;
+  will-change: background-position;
+  font-weight: 800;
+}
+
+/* Fallback for unsupported browsers */
+@supports not (-webkit-background-clip: text) {
+  .hero-pod__heading--gradient {
+    color: #6366F1;
+  }
 }
 
 .hero-pod__text {
@@ -79,14 +120,27 @@
   align-items: center;
   gap: 0.75rem;
   padding: 0.75rem;
-  background-color: rgba(var(--color-foreground), 0.02);
+  background: var(--gradient-neutral);
   border-radius: 8px;
   border: 1px solid rgba(var(--color-foreground), 0.08);
+  transition: all 0.3s ease;
+  transform: translateZ(0);
+}
+
+.hero-feature:hover {
+  background: var(--gradient-success-subtle);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(16, 185, 129, 0.1);
 }
 
 .hero-feature__icon {
-  color: rgb(99, 102, 241);
+  color: rgb(16, 185, 129);
   flex-shrink: 0;
+  transition: color 0.3s ease;
+}
+
+.hero-feature:hover .hero-feature__icon {
+  color: rgb(16, 185, 129);
 }
 
 .hero-feature span {
