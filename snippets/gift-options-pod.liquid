@@ -1,0 +1,474 @@
+{% comment %}
+  Gift Options Component
+  Allows customers to add gift wrapping, personalization, and gift messages
+  
+  Usage: {% render 'gift-options-pod', product: product %}
+{% endcomment %}
+
+<div class="gift-options-pod">
+  <div class="gift-options__header">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <polyline points="20 12 20 22 4 22 4 12"/>
+      <rect x="2" y="7" width="20" height="5"/>
+      <line x1="12" y1="22" x2="12" y2="7"/>
+      <path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"/>
+      <path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"/>
+    </svg>
+    <h3>Make it a Gift</h3>
+  </div>
+
+  <div class="gift-options__content">
+    {%- comment -%} Gift Wrapping Option {%- endcomment -%}
+    <label class="gift-option">
+      <input 
+        type="checkbox" 
+        name="properties[Gift Wrapping]"
+        value="Yes"
+        class="gift-option__checkbox"
+        data-gift-wrapping
+      >
+      <div class="gift-option__card">
+        <div class="gift-option__icon">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="20 12 20 22 4 22 4 12"/>
+            <rect x="2" y="7" width="20" height="5"/>
+            <line x1="12" y1="22" x2="12" y2="7"/>
+            <path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"/>
+            <path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"/>
+          </svg>
+        </div>
+        <div class="gift-option__info">
+          <span class="gift-option__title">Gift Wrapping</span>
+          <span class="gift-option__description">Beautiful Valentine's themed wrapping</span>
+          <span class="gift-option__price">+ $2.99</span>
+        </div>
+        <span class="gift-option__checkmark">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3">
+            <polyline points="20 6 9 17 4 12"/>
+          </svg>
+        </span>
+      </div>
+    </label>
+
+    {%- comment -%} Gift Message Option {%- endcomment -%}
+    <div class="gift-message-wrapper" id="giftMessageWrapper" style="display: none;">
+      <label for="giftMessage" class="gift-message-label">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+        </svg>
+        Gift Message (Optional)
+      </label>
+      <textarea
+        id="giftMessage"
+        name="properties[Gift Message]"
+        class="gift-message-textarea"
+        placeholder="Add a personal message for the recipient..."
+        rows="3"
+        maxlength="200"
+      ></textarea>
+      <div class="gift-message-counter">
+        <span id="messageCounter">0</span>/200 characters
+      </div>
+    </div>
+
+    {%- comment -%} Personalization Fields {%- endcomment -%}
+    <div class="personalization-fields">
+      <div class="personalization-header">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M12 20h9"/>
+          <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/>
+        </svg>
+        <h4>Personalization (Optional)</h4>
+      </div>
+      <p class="personalization-note">Add custom text to make this item uniquely yours!</p>
+      
+      <div class="personalization-grid">
+        <div class="personalization-field">
+          <label for="customName1">Name 1 (Optional)</label>
+          <input
+            type="text"
+            id="customName1"
+            name="properties[Name 1]"
+            placeholder="e.g., Sarah"
+            maxlength="20"
+          >
+        </div>
+        
+        <div class="personalization-field">
+          <label for="customName2">Name 2 (Optional)</label>
+          <input
+            type="text"
+            id="customName2"
+            name="properties[Name 2]"
+            placeholder="e.g., Michael"
+            maxlength="20"
+          >
+        </div>
+        
+        <div class="personalization-field personalization-field--full">
+          <label for="customDate">Special Date (Optional)</label>
+          <input
+            type="text"
+            id="customDate"
+            name="properties[Special Date]"
+            placeholder="e.g., Est. 2024"
+            maxlength="15"
+          >
+          <span class="personalization-hint">Wedding date, anniversary, etc.</span>
+        </div>
+      </div>
+      
+      <div class="personalization-preview">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="10"/>
+          <line x1="12" y1="16" x2="12" y2="12"/>
+          <line x1="12" y1="8" x2="12.01" y2="8"/>
+        </svg>
+        <span>We'll send you a design preview within 24 hours for approval before printing</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+/* Gift Options Component */
+.gift-options-pod {
+  margin: 2rem 0;
+  padding: 1.5rem;
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.03) 0%, rgba(236, 72, 153, 0.03) 100%);
+  border: 1px solid rgba(99, 102, 241, 0.2);
+  border-radius: 12px;
+}
+
+.gift-options__header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+}
+
+.gift-options__header svg {
+  color: rgb(236, 72, 153);
+}
+
+.gift-options__header h3 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin: 0;
+  color: rgb(var(--color-foreground));
+}
+
+.gift-options__content {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+/* Gift Option Card */
+.gift-option {
+  display: block;
+  cursor: pointer;
+}
+
+.gift-option__checkbox {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.gift-option__card {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.25rem;
+  background: white;
+  border: 2px solid rgba(var(--color-foreground), 0.1);
+  border-radius: 12px;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.gift-option__checkbox:checked + .gift-option__card {
+  border-color: rgb(99, 102, 241);
+  background: rgba(99, 102, 241, 0.05);
+}
+
+.gift-option__card:hover {
+  border-color: rgb(99, 102, 241);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(99, 102, 241, 0.15);
+}
+
+.gift-option__icon {
+  flex-shrink: 0;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(236, 72, 153, 0.1);
+  border-radius: 50%;
+  color: rgb(236, 72, 153);
+}
+
+.gift-option__info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.gift-option__title {
+  font-size: 1rem;
+  font-weight: 600;
+  color: rgb(var(--color-foreground));
+}
+
+.gift-option__description {
+  font-size: 0.875rem;
+  color: rgba(var(--color-foreground), 0.6);
+}
+
+.gift-option__price {
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: rgb(99, 102, 241);
+}
+
+.gift-option__checkmark {
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(var(--color-foreground), 0.1);
+  border-radius: 50%;
+  transition: all 0.3s ease;
+}
+
+.gift-option__checkbox:checked + .gift-option__card .gift-option__checkmark {
+  background: rgb(99, 102, 241);
+}
+
+/* Gift Message */
+.gift-message-wrapper {
+  padding: 1.25rem;
+  background: white;
+  border: 1px solid rgba(var(--color-foreground), 0.1);
+  border-radius: 12px;
+  animation: slideDown 0.3s ease;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.gift-message-label {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+  color: rgb(var(--color-foreground));
+}
+
+.gift-message-label svg {
+  color: rgb(236, 72, 153);
+}
+
+.gift-message-textarea {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid rgba(var(--color-foreground), 0.2);
+  border-radius: 8px;
+  font-size: 0.9375rem;
+  font-family: inherit;
+  resize: vertical;
+  transition: border-color 0.3s ease;
+}
+
+.gift-message-textarea:focus {
+  outline: none;
+  border-color: rgb(99, 102, 241);
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+}
+
+.gift-message-counter {
+  margin-top: 0.5rem;
+  font-size: 0.8125rem;
+  color: rgba(var(--color-foreground), 0.5);
+  text-align: right;
+}
+
+/* Personalization Fields */
+.personalization-fields {
+  padding: 1.25rem;
+  background: white;
+  border: 1px solid rgba(var(--color-foreground), 0.1);
+  border-radius: 12px;
+}
+
+.personalization-header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.personalization-header svg {
+  color: rgb(99, 102, 241);
+}
+
+.personalization-header h4 {
+  font-size: 1rem;
+  font-weight: 600;
+  margin: 0;
+}
+
+.personalization-note {
+  font-size: 0.875rem;
+  color: rgba(var(--color-foreground), 0.6);
+  margin-bottom: 1.25rem;
+}
+
+.personalization-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.personalization-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.personalization-field--full {
+  grid-column: 1 / -1;
+}
+
+.personalization-field label {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: rgb(var(--color-foreground));
+}
+
+.personalization-field input {
+  padding: 0.75rem;
+  border: 1px solid rgba(var(--color-foreground), 0.2);
+  border-radius: 8px;
+  font-size: 0.9375rem;
+  transition: border-color 0.3s ease;
+}
+
+.personalization-field input:focus {
+  outline: none;
+  border-color: rgb(99, 102, 241);
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+}
+
+.personalization-hint {
+  font-size: 0.8125rem;
+  color: rgba(var(--color-foreground), 0.5);
+  font-style: italic;
+}
+
+.personalization-preview {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  padding: 1rem;
+  background: rgba(99, 102, 241, 0.05);
+  border-left: 3px solid rgb(99, 102, 241);
+  border-radius: 6px;
+}
+
+.personalization-preview svg {
+  flex-shrink: 0;
+  color: rgb(99, 102, 241);
+  margin-top: 2px;
+}
+
+.personalization-preview span {
+  font-size: 0.875rem;
+  line-height: 1.5;
+  color: rgba(var(--color-foreground), 0.7);
+}
+
+/* Mobile Responsive */
+@media screen and (max-width: 749px) {
+  .gift-options-pod {
+    padding: 1.25rem;
+  }
+  
+  .gift-option__card {
+    padding: 1rem;
+  }
+  
+  .gift-option__icon {
+    width: 40px;
+    height: 40px;
+  }
+  
+  .gift-option__icon svg {
+    width: 24px;
+    height: 24px;
+  }
+  
+  .personalization-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .personalization-field--full {
+    grid-column: 1;
+  }
+}
+</style>
+
+<script>
+(function() {
+  const giftWrappingCheckbox = document.querySelector('[data-gift-wrapping]');
+  const giftMessageWrapper = document.getElementById('giftMessageWrapper');
+  const giftMessageTextarea = document.getElementById('giftMessage');
+  const messageCounter = document.getElementById('messageCounter');
+  
+  // Toggle gift message field when gift wrapping is selected
+  if (giftWrappingCheckbox && giftMessageWrapper) {
+    giftWrappingCheckbox.addEventListener('change', function() {
+      if (this.checked) {
+        giftMessageWrapper.style.display = 'block';
+      } else {
+        giftMessageWrapper.style.display = 'none';
+        if (giftMessageTextarea) {
+          giftMessageTextarea.value = '';
+        }
+      }
+    });
+  }
+  
+  // Character counter for gift message
+  if (giftMessageTextarea && messageCounter) {
+    giftMessageTextarea.addEventListener('input', function() {
+      messageCounter.textContent = this.value.length;
+    });
+  }
+  
+  // Validate personalization inputs (optional: add custom validation)
+  const personalizationInputs = document.querySelectorAll('.personalization-field input');
+  personalizationInputs.forEach(input => {
+    input.addEventListener('input', function() {
+      // Remove special characters except spaces, hyphens, and periods
+      this.value = this.value.replace(/[^a-zA-Z0-9\s\-\.]/g, '');
+    });
+  });
+})();
+</script>
