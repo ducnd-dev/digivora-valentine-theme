@@ -1,0 +1,70 @@
+{% comment %}
+  POD Homepage Hero Section
+  Replaces default image-banner with POD-specific hero
+{% endcomment %}
+
+{{ 'section-hero-pod.css' | asset_url | stylesheet_tag }}
+
+{% render 'hero-pod' %}
+
+{% schema %}
+{
+  "name": "POD Hero Section",
+  "tag": "section",
+  "class": "section",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "Modern hero section optimized for Print on Demand business. Features gradient text, product grid, and trust signals."
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Design Your Style"
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "We Print It"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Description",
+      "default": "Premium quality prints on demand. Personalized products, eco-friendly materials, and fast delivery."
+    },
+    {
+      "type": "url",
+      "id": "button_link_1",
+      "label": "Primary Button Link"
+    },
+    {
+      "type": "text",
+      "id": "button_label_1",
+      "label": "Primary Button Label",
+      "default": "Shop All Products"
+    },
+    {
+      "type": "url",
+      "id": "button_link_2",
+      "label": "Secondary Button Link"
+    },
+    {
+      "type": "text",
+      "id": "button_label_2",
+      "label": "Secondary Button Label",
+      "default": "How It Works"
+    }
+  ],
+  "presets": [
+    {
+      "name": "POD Hero"
+    }
+  ]
+}
+{% endschema %}
