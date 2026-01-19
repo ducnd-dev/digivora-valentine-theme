@@ -267,6 +267,9 @@
       <script src="{{ 'localization-form.js' | asset_url }}" defer="defer"></script>
     {%- endif -%}
 
+    {%- comment -%} POD Components {%- endcomment -%}
+    {{ 'component-trust-badges.css' | asset_url | stylesheet_tag }}
+
     {%- if settings.predictive_search_enabled -%}
       <link
         rel="stylesheet"
