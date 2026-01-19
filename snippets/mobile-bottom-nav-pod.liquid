@@ -103,7 +103,11 @@
 
 .mobile-nav-item.active,
 .mobile-nav-item:hover {
-  color: rgb(99, 102, 241);
+  color: white;
+  background: var(--gradient-primary);
+  border-radius: 12px;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
 }
 
 .mobile-nav-item svg {
@@ -123,7 +127,7 @@
   position: absolute;
   top: 0.25rem;
   right: 0.5rem;
-  background: rgb(236, 72, 153);
+  background: var(--gradient-urgency);
   color: white;
   font-size: 0.625rem;
   font-weight: 700;
@@ -132,6 +136,7 @@
   min-width: 18px;
   text-align: center;
   line-height: 1.2;
+  animation: gradient-pulse 2s ease-in-out infinite;
 }
 
 .mobile-nav-cart-count:empty {
@@ -147,7 +152,7 @@
   transform: translateX(-50%);
   width: 4px;
   height: 4px;
-  background: rgb(99, 102, 241);
+  background: white;
   border-radius: 50%;
 }
 

@@ -3,11 +3,22 @@
   height: 100%;
   position: relative;
   text-decoration: none;
+  transition: all 0.3s ease;
+  transform: translateZ(0);
+}
+
+.card-wrapper:hover {
+  transform: translateY(-4px);
 }
 
 .card {
   text-decoration: none;
   text-align: var(--text-alignment);
+  transition: box-shadow 0.3s ease;
+}
+
+.card:hover {
+  box-shadow: 0 12px 24px rgba(99, 102, 241, 0.1);
 }
 
 .card:not(.ratio) {
@@ -46,6 +57,14 @@
   box-sizing: border-box;
   border-radius: var(--border-radius);
   border: var(--border-width) solid rgba(var(--color-foreground), var(--border-opacity));
+  background: var(--gradient-neutral);
+  transition: all 0.3s ease;
+}
+
+.card--card:hover,
+.card--standard:hover .card__inner {
+  background: var(--gradient-valentine-subtle);
+  border-color: rgba(236, 72, 153, 0.2);
 }
 
 .card--card:after,
