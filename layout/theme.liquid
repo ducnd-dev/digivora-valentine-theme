@@ -254,6 +254,11 @@
 
     {{ 'base.css' | asset_url | stylesheet_tag }}
     {{ 'digivora.css' | asset_url | stylesheet_tag }}
+    
+    {%- comment -%} Gradient System {%- endcomment -%}
+    {{ 'gradient-system-pod.css' | asset_url | stylesheet_tag }}
+    {{ 'component-button-gradient.css' | asset_url | stylesheet_tag }}
+    {{ 'mobile-gradient-optimizations.css' | asset_url | stylesheet_tag }}
 
     {%- unless settings.type_body_font.system? -%}
       <link rel="preload" as="font" href="{{ settings.type_body_font | font_url }}" type="font/woff2" crossorigin>
@@ -266,6 +271,16 @@
       {{ 'component-localization-form.css' | asset_url | stylesheet_tag: preload: true }}
       <script src="{{ 'localization-form.js' | asset_url }}" defer="defer"></script>
     {%- endif -%}
+
+    {%- comment -%} POD Components {%- endcomment -%}
+    {{ 'component-trust-badges.css' | asset_url | stylesheet_tag }}
+    {{ 'component-size-guide.css' | asset_url | stylesheet_tag }}
+    {{ 'component-review-summary.css' | asset_url | stylesheet_tag }}
+    {{ 'component-product-tabs.css' | asset_url | stylesheet_tag }}
+    {{ 'section-hero-pod.css' | asset_url | stylesheet_tag }}
+    {{ 'component-card-product-pod.css' | asset_url | stylesheet_tag }}
+    {{ 'component-sticky-atc.css' | asset_url | stylesheet_tag }}
+    {{ 'component-customer-photos.css' | asset_url | stylesheet_tag }}
 
     {%- if settings.predictive_search_enabled -%}
       <link
@@ -396,5 +411,13 @@
     {%- if settings.predictive_search_enabled -%}
       <script src="{{ 'predictive-search.js' | asset_url }}" defer="defer"></script>
     {%- endif -%}
+    
+    {%- comment -%} POD Week 3 & 4 Components {%- endcomment -%}
+    <script src="{{ 'recently-viewed-pod.js' | asset_url }}" defer="defer"></script>
+    <script src="{{ 'mobile-touch-enhancements.js' | asset_url }}" defer="defer"></script>
+    {% render 'lazy-load-images-pod' %}
+    
+    {%- comment -%} Mobile Bottom Navigation {%- endcomment -%}
+    {% render 'mobile-bottom-nav-pod' %}
   </body>
 </html>

@@ -1,0 +1,472 @@
+/* ====================================================
+   MOBILE GRADIENT OPTIMIZATIONS
+   Enhanced mobile performance and UX
+   ==================================================== */
+
+/* ====================================
+   1. SIMPLIFIED GRADIENTS FOR MOBILE
+   ==================================== */
+
+@media screen and (max-width: 749px) {
+  /* Simplify complex mesh gradients */
+  :root {
+    --gradient-mesh: linear-gradient(
+      135deg,
+      rgba(99, 102, 241, 0.08) 0%,
+      rgba(236, 72, 153, 0.04) 100%
+    );
+  }
+
+  /* Reduce animation speed for better battery life */
+  .gradient-text-animate,
+  [class*="gradient-"][class*="animate"] {
+    animation-duration: 8s !important; /* Slower */
+  }
+
+  .button-gradient-primary::before,
+  [class*="shimmer"] {
+    animation-duration: 4s !important;
+  }
+
+  /* Simplify hero background on mobile */
+  .hero-pod {
+    background: linear-gradient(
+      135deg,
+      rgba(99, 102, 241, 0.05) 0%,
+      rgba(236, 72, 153, 0.05) 100%
+    ) !important;
+  }
+
+  .hero-pod::before {
+    display: none; /* Remove animated overlay on mobile */
+  }
+
+  /* Use solid colors for small badges */
+  .badge-gradient-sale,
+  .badge-gradient-new,
+  .badge-gradient-featured,
+  .mobile-nav-cart-count {
+    background: #EF4444 !important; /* Solid red */
+    animation: none !important;
+  }
+
+  .badge-gradient-new {
+    background: #10B981 !important; /* Solid green */
+  }
+
+  .badge-gradient-featured,
+  .mobile-nav-cart-count {
+    background: #EC4899 !important; /* Solid pink */
+  }
+
+  /* Simplify trust badges on mobile */
+  .trust-badge {
+    background: rgba(16, 185, 129, 0.1) !important;
+  }
+
+  .trust-badge:active {
+    background: rgba(16, 185, 129, 0.2) !important;
+  }
+}
+
+/* ====================================
+   2. TOUCH-FRIENDLY INTERACTIONS
+   ==================================== */
+
+@media screen and (max-width: 749px) {
+  /* Larger tap targets */
+  .button,
+  .quick-add-pod__button,
+  .mobile-nav-item,
+  .zoom-control,
+  .active-filter-tag {
+    min-height: 48px;
+    min-width: 48px;
+  }
+
+  /* Touch feedback with simpler gradients */
+  .button:active {
+    background: var(--gradient-primary-hover) !important;
+    transform: scale(0.98);
+  }
+
+  .mobile-nav-item:active {
+    transform: scale(0.95);
+    background: rgba(99, 102, 241, 0.2) !important;
+  }
+
+  /* Disable hover effects on touch devices */
+  .card-wrapper:hover,
+  .card:hover {
+    transform: none;
+    box-shadow: none;
+  }
+
+  /* Only show gradients on tap, not hover */
+  .card-wrapper:active .card,
+  .trust-badge:active,
+  .gift-option__card:active {
+    background: var(--gradient-valentine-subtle);
+  }
+
+  /* Simplify button shimmer on mobile */
+  .button-gradient-primary::before {
+    opacity: 0.5; /* Less intense */
+  }
+}
+
+/* ====================================
+   3. MOBILE-SPECIFIC GRADIENT EFFECTS
+   ==================================== */
+
+@media screen and (max-width: 749px) {
+  /* Bottom sheet gradient */
+  .quick-add-pod__modal-content {
+    background: 
+      linear-gradient(to bottom, white 0%, #FAFAFA 100%);
+  }
+
+  /* Mobile nav gradient (simplified) */
+  .mobile-bottom-nav {
+    background: linear-gradient(
+      to top,
+      rgba(255, 255, 255, 0.98),
+      rgba(255, 255, 255, 1)
+    );
+  }
+
+  /* Sticky ATC gradient (if exists) */
+  .sticky-atc-mobile {
+    background: linear-gradient(
+      to top,
+      white 0%,
+      rgba(255, 255, 255, 0.98) 100%
+    );
+  }
+
+  /* Simplified urgency indicators */
+  .urgency-indicator {
+    animation: slideInUp 0.4s ease !important; /* Remove pulse */
+  }
+
+  .urgency-indicator--stock {
+    background: #F59E0B !important; /* Solid amber */
+  }
+
+  .urgency-indicator--viewers {
+    background: #3B82F6 !important; /* Solid blue */
+  }
+
+  .urgency-indicator--purchase {
+    background: #10B981 !important; /* Solid green */
+  }
+}
+
+/* ====================================
+   4. MOBILE SCROLL PERFORMANCE
+   ==================================== */
+
+@media screen and (max-width: 749px) {
+  /* Disable expensive effects during scroll */
+  .scrolling .gradient-text-animate,
+  .scrolling [class*="shimmer"],
+  .scrolling [class*="pulse"] {
+    animation-play-state: paused !important;
+  }
+
+  /* Re-enable after scroll stops */
+  .scroll-stopped .gradient-text-animate,
+  .scroll-stopped [class*="shimmer"],
+  .scroll-stopped [class*="pulse"] {
+    animation-play-state: running !important;
+  }
+}
+
+/* ====================================
+   5. LOW-END DEVICE OPTIMIZATIONS
+   ==================================== */
+
+/* Detect low-end devices via media query */
+@media (prefers-reduced-motion: reduce),
+       (max-width: 749px) and (max-resolution: 192dpi) {
+  
+  /* Remove all animations on low-end devices */
+  .gradient-text-animate,
+  .button-gradient-primary::before,
+  [class*="gradient-"][class*="animate"],
+  [class*="shimmer"],
+  [class*="pulse"] {
+    animation: none !important;
+    transition: none !important;
+  }
+
+  /* Use solid colors instead of gradients */
+  .button:not(.button--secondary):not(.button--tertiary) {
+    background: #6366F1 !important;
+  }
+
+  .button--secondary {
+    background: transparent !important;
+    border: 2px solid #EC4899 !important;
+  }
+
+  .hero-pod {
+    background: #F9FAFB !important;
+  }
+
+  .card--card,
+  .card--standard .card__inner {
+    background: white !important;
+  }
+
+  /* Keep text gradients for brand consistency */
+  .hero-pod__heading--gradient {
+    background: linear-gradient(135deg, #6366F1 0%, #EC4899 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+}
+
+/* ====================================
+   6. BATTERY SAVER MODE
+   ==================================== */
+
+/* Simplify when battery is low (if supported) */
+@media (prefers-reduced-data: reduce) {
+  /* Remove complex gradients */
+  .gradient-mesh,
+  .hero-pod::before {
+    display: none !important;
+  }
+
+  /* Use solid colors */
+  [class*="gradient-"] {
+    background: var(--fallback-color, #6366F1) !important;
+  }
+}
+
+/* ====================================
+   7. MOBILE SAFE AREA (Notches)
+   ==================================== */
+
+@media screen and (max-width: 749px) {
+  /* Account for iPhone notch and home indicator */
+  .mobile-bottom-nav {
+    padding-bottom: calc(0.5rem + env(safe-area-inset-bottom));
+  }
+
+  .sticky-atc-mobile {
+    padding-bottom: calc(1rem + env(safe-area-inset-bottom));
+  }
+
+  /* Top safe area for fullscreen modals */
+  .quick-add-pod__modal-content,
+  .product-zoom__modal {
+    padding-top: env(safe-area-inset-top);
+  }
+}
+
+/* ====================================
+   8. MOBILE-SPECIFIC ANIMATIONS
+   ==================================== */
+
+@media screen and (max-width: 749px) {
+  /* Smooth slide-up animation for modals */
+  @keyframes mobileSlideUp {
+    from {
+      opacity: 0;
+      transform: translateY(100%);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .quick-add-pod__modal-content,
+  .product-zoom__modal-content {
+    animation: mobileSlideUp 0.3s ease-out;
+  }
+
+  /* Bounce effect on tap */
+  @keyframes mobileTapBounce {
+    0% { transform: scale(1); }
+    50% { transform: scale(0.95); }
+    100% { transform: scale(1); }
+  }
+
+  .button:active,
+  .mobile-nav-item:active {
+    animation: mobileTapBounce 0.2s ease;
+  }
+}
+
+/* ====================================
+   9. MOBILE GRADIENT TEXT FALLBACK
+   ==================================== */
+
+@media screen and (max-width: 749px) {
+  /* Ensure gradient text is readable on small screens */
+  .gradient-text-primary,
+  .gradient-text-accent,
+  .gradient-text-valentine {
+    /* Add subtle shadow for better readability */
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+    
+    /* Ensure minimum font size */
+    font-size: max(16px, 1em);
+  }
+
+  .hero-pod__heading--gradient {
+    /* Simplify animated gradient on mobile */
+    background: linear-gradient(135deg, #6366F1 0%, #EC4899 100%);
+    background-size: 100% auto; /* No animation scroll */
+    animation: none;
+  }
+}
+
+/* ====================================
+   10. DEBUG MODE (Development Only)
+   ==================================== */
+
+/* Show performance info on mobile (remove in production) */
+@media screen and (max-width: 749px) {
+  .mobile-performance-debug {
+    position: fixed;
+    bottom: 80px;
+    right: 10px;
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 0.5rem;
+    border-radius: 8px;
+    font-size: 10px;
+    z-index: 9999;
+    pointer-events: none;
+  }
+
+  /* Hide by default - enable with ?debug=1 in URL */
+  body:not(.debug-mode) .mobile-performance-debug {
+    display: none;
+  }
+}
+
+/* ====================================
+   11. MOBILE FOCUS STATES
+   ==================================== */
+
+@media screen and (max-width: 749px) {
+  /* Larger focus rings for mobile accessibility */
+  .button:focus-visible,
+  .mobile-nav-item:focus-visible {
+    outline: 4px solid #6366F1;
+    outline-offset: 4px;
+  }
+
+  /* Visible tap feedback */
+  .button:active::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: inherit;
+    animation: tapFeedback 0.3s ease;
+  }
+
+  @keyframes tapFeedback {
+    0% {
+      opacity: 1;
+      transform: scale(1);
+    }
+    100% {
+      opacity: 0;
+      transform: scale(1.1);
+    }
+  }
+}
+
+/* ====================================
+   12. MOBILE-SPECIFIC UTILITIES
+   ==================================== */
+
+@media screen and (max-width: 749px) {
+  /* Hide gradient decorations on mobile */
+  .gradient-decoration,
+  .gradient-blob,
+  .gradient-mesh-overlay {
+    display: none !important;
+  }
+
+  /* Prevent horizontal scroll from gradients */
+  body {
+    overflow-x: hidden;
+  }
+
+  /* Contain gradient repaints */
+  [class*="gradient-"] {
+    contain: layout style paint;
+  }
+}
+
+/* ====================================
+   13. PROGRESSIVE ENHANCEMENT
+   ==================================== */
+
+/* Basic styles for all devices */
+.gradient-enhanced-component {
+  background: #F3F4F6; /* Fallback */
+}
+
+/* Enhanced gradients for capable devices */
+@media (min-width: 750px) and (prefers-reduced-motion: no-preference) {
+  .gradient-enhanced-component {
+    background: var(--gradient-primary);
+  }
+}
+
+/* ====================================
+   14. MOBILE LOADING STATES
+   ==================================== */
+
+@media screen and (max-width: 749px) {
+  /* Skeleton gradient for loading */
+  .skeleton-mobile {
+    background: linear-gradient(
+      90deg,
+      #F3F4F6 0%,
+      #E5E7EB 50%,
+      #F3F4F6 100%
+    );
+    background-size: 200% 100%;
+    animation: skeletonMobile 2s ease-in-out infinite;
+  }
+
+  @keyframes skeletonMobile {
+    0% { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+  }
+}
+
+/* ====================================
+   15. FINAL OPTIMIZATIONS
+   ==================================== */
+
+@media screen and (max-width: 749px) {
+  /* Force hardware acceleration for smooth scrolling */
+  .gradient-component,
+  [class*="gradient-"] {
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+  }
+
+  /* Optimize repaints */
+  .gradient-container {
+    will-change: auto; /* Only use when animating */
+  }
+
+  .gradient-container.animating {
+    will-change: transform, opacity;
+  }
+}

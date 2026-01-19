@@ -100,6 +100,16 @@
               {%- endif -%}
             </div>
           </div>
+          {%- comment -%} POD Quick View Button {%- endcomment -%}
+          <div class="quick-view-button">
+            <button 
+              class="button" 
+              onclick="window.location.href='{{ card_product.url }}'"
+              aria-label="Quick view {{ card_product.title }}"
+            >
+              Quick View
+            </button>
+          </div>
         {%- endif -%}
         <div class="card__content">
           <div class="card__information">
@@ -211,9 +221,10 @@
           </div>
         </div>
         {%- if show_quick_add -%}
-          <div class="quick-add no-js-hidden">
-            {%- liquid
-              assign product_form_id = 'quick-add-' | append: section_id | append: card_product.id
+          {%- comment -%} POD Quick Add Component {%- endcomment -%}
+          {% render 'quick-add-pod', card_product: card_product, section_id: section.id %}
+        {%- endif -%}
+      </div>
               assign qty_rules = false
               if card_product.selected_or_first_available_variant.quantity_rule.min > 1 or card_product.selected_or_first_available_variant.quantity_rule.max != null or card_product.selected_or_first_available_variant.quantity_rule.increment > 1
                 assign qty_rules = true

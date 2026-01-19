@@ -1,0 +1,541 @@
+/**
+ * Gradient System for Digivora POD Theme
+ * Version: 1.0.0
+ * Purpose: Comprehensive gradient system with CSS custom properties
+ * Performance: GPU-accelerated, mobile-optimized
+ */
+
+/* ========================================
+   CSS Custom Properties - Gradient Palette
+   ======================================== */
+
+:root {
+  /* Primary Gradients (Hero, CTA) */
+  --gradient-primary: linear-gradient(135deg, #6366F1 0%, #8B5CF6 100%);
+  --gradient-primary-hover: linear-gradient(135deg, #4F46E5 0%, #7C3AED 100%);
+  
+  /* Accent Gradients (Secondary Actions, Badges) */
+  --gradient-accent: linear-gradient(135deg, #EC4899 0%, #F472B6 100%);
+  --gradient-accent-hover: linear-gradient(135deg, #DB2777 0%, #EC4899 100%);
+  
+  /* Valentine Special (Seasonal Campaigns) */
+  --gradient-valentine: linear-gradient(135deg, #EC4899 0%, #F472B6 50%, #FBBF24 100%);
+  --gradient-valentine-subtle: linear-gradient(135deg, rgba(236, 72, 153, 0.1) 0%, rgba(244, 114, 182, 0.05) 100%);
+  
+  /* Neutral Elegant (Backgrounds, Cards) */
+  --gradient-neutral: linear-gradient(135deg, #F9FAFB 0%, #FFFFFF 100%);
+  --gradient-neutral-reverse: linear-gradient(135deg, #FFFFFF 0%, #F3F4F6 100%);
+  
+  /* Dark Premium (Footer, Contrast Sections) */
+  --gradient-dark: linear-gradient(135deg, #1F2937 0%, #374151 100%);
+  --gradient-dark-accent: linear-gradient(135deg, #1F2937 0%, #6366F1 100%);
+  
+  /* Success/Trust (Badges, Shipping) */
+  --gradient-success: linear-gradient(135deg, #10B981 0%, #14B8A6 100%);
+  --gradient-success-subtle: linear-gradient(135deg, rgba(16, 185, 129, 0.1) 0%, rgba(20, 184, 166, 0.05) 100%);
+  
+  /* Urgency (Sale, Low Stock) */
+  --gradient-urgency: linear-gradient(135deg, #EF4444 0%, #F97316 100%);
+  --gradient-urgency-pulse: linear-gradient(135deg, #DC2626 0%, #EA580C 100%);
+  
+  /* Special Effects */
+  --gradient-mesh: 
+    radial-gradient(at 27% 37%, hsla(271, 70%, 60%, 0.2) 0px, transparent 50%),
+    radial-gradient(at 97% 21%, hsla(331, 70%, 60%, 0.2) 0px, transparent 50%),
+    radial-gradient(at 52% 99%, hsla(250, 70%, 70%, 0.2) 0px, transparent 50%),
+    radial-gradient(at 10% 29%, hsla(289, 70%, 60%, 0.2) 0px, transparent 50%),
+    radial-gradient(at 97% 96%, hsla(318, 70%, 60%, 0.2) 0px, transparent 50%);
+  
+  --gradient-shimmer: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.8) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
+}
+
+/* ========================================
+   Utility Classes - Background Gradients
+   ======================================== */
+
+.bg-gradient-primary {
+  background: var(--gradient-primary);
+}
+
+.bg-gradient-accent {
+  background: var(--gradient-accent);
+}
+
+.bg-gradient-valentine {
+  background: var(--gradient-valentine);
+}
+
+.bg-gradient-neutral {
+  background: var(--gradient-neutral);
+}
+
+.bg-gradient-dark {
+  background: var(--gradient-dark);
+}
+
+.bg-gradient-success {
+  background: var(--gradient-success);
+}
+
+.bg-gradient-urgency {
+  background: var(--gradient-urgency);
+}
+
+/* ========================================
+   Gradient Text Effects
+   ======================================== */
+
+.gradient-text-primary {
+  background: var(--gradient-primary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-weight: 700;
+}
+
+/* Fallback for unsupported browsers */
+@supports not (-webkit-background-clip: text) {
+  .gradient-text-primary {
+    color: #6366F1;
+  }
+}
+
+.gradient-text-accent {
+  background: var(--gradient-accent);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-weight: 700;
+}
+
+@supports not (-webkit-background-clip: text) {
+  .gradient-text-accent {
+    color: #EC4899;
+  }
+}
+
+.gradient-text-valentine {
+  background: var(--gradient-valentine);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-weight: 700;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+@supports not (-webkit-background-clip: text) {
+  .gradient-text-valentine {
+    color: #EC4899;
+  }
+}
+
+/* ========================================
+   Animated Gradient Text
+   ======================================== */
+
+.gradient-text-animate {
+  background: linear-gradient(
+    90deg,
+    #6366F1 0%,
+    #EC4899 25%,
+    #8B5CF6 50%,
+    #6366F1 75%,
+    #EC4899 100%
+  );
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: gradient-shift 3s linear infinite;
+  font-weight: 700;
+  will-change: background-position;
+}
+
+@keyframes gradient-shift {
+  0% {
+    background-position: 0% center;
+  }
+  100% {
+    background-position: 200% center;
+  }
+}
+
+/* Respect reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  .gradient-text-animate {
+    animation: none !important;
+    background-position: 0% center;
+  }
+}
+
+/* ========================================
+   Gradient Borders
+   ======================================== */
+
+.gradient-border {
+  position: relative;
+  background: white;
+  border: none;
+  border-radius: 8px;
+}
+
+.gradient-border::before {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  background: var(--gradient-primary);
+  border-radius: inherit;
+  z-index: -1;
+  opacity: 0.8;
+}
+
+.gradient-border-accent::before {
+  background: var(--gradient-accent);
+}
+
+.gradient-border-valentine::before {
+  background: var(--gradient-valentine);
+}
+
+/* ========================================
+   Gradient Hover Effects
+   ======================================== */
+
+.gradient-hover {
+  background: var(--gradient-neutral);
+  transition: background 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.gradient-hover:hover {
+  background: var(--gradient-primary);
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 16px rgba(99, 102, 241, 0.2);
+}
+
+/* ========================================
+   Button Gradient Styles
+   ======================================== */
+
+.button-gradient-primary {
+  background: var(--gradient-primary);
+  border: none;
+  color: white;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}
+
+.button-gradient-primary::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: var(--gradient-shimmer);
+  animation: shimmer 2s infinite;
+  will-change: left;
+}
+
+@keyframes shimmer {
+  to {
+    left: 100%;
+  }
+}
+
+.button-gradient-primary:hover,
+.button-gradient-primary:focus {
+  background: var(--gradient-primary-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 16px rgba(99, 102, 241, 0.3);
+}
+
+.button-gradient-primary:active {
+  transform: translateY(0);
+  box-shadow: 0 4px 8px rgba(99, 102, 241, 0.2);
+}
+
+/* Secondary Gradient Button */
+.button-gradient-secondary {
+  background: transparent;
+  border: 2px solid transparent;
+  background-clip: padding-box;
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.button-gradient-secondary::before {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  background: var(--gradient-accent);
+  border-radius: inherit;
+  z-index: -1;
+}
+
+.button-gradient-secondary:hover,
+.button-gradient-secondary:focus {
+  background: var(--gradient-accent);
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 16px rgba(236, 72, 153, 0.3);
+}
+
+/* ========================================
+   Card Gradient Effects
+   ======================================== */
+
+.card-gradient-hover {
+  background: var(--gradient-neutral);
+  transition: all 0.3s ease;
+  transform: translateZ(0);
+}
+
+.card-gradient-hover:hover {
+  background: var(--gradient-valentine-subtle);
+  transform: translateY(-4px);
+  box-shadow: 0 12px 24px rgba(236, 72, 153, 0.15);
+}
+
+/* ========================================
+   Badge Gradient Styles
+   ======================================== */
+
+.badge-gradient-sale {
+  background: var(--gradient-urgency);
+  color: white;
+  font-weight: 700;
+  padding: 0.25rem 0.75rem;
+  border-radius: 4px;
+  font-size: 0.875rem;
+}
+
+.badge-gradient-new {
+  background: var(--gradient-success);
+  color: white;
+  font-weight: 700;
+  padding: 0.25rem 0.75rem;
+  border-radius: 4px;
+  font-size: 0.875rem;
+}
+
+.badge-gradient-featured {
+  background: var(--gradient-valentine);
+  color: white;
+  font-weight: 700;
+  padding: 0.25rem 0.75rem;
+  border-radius: 4px;
+  font-size: 0.875rem;
+}
+
+/* ========================================
+   Pulse Animation
+   ======================================== */
+
+.gradient-pulse {
+  animation: gradient-pulse 2s ease-in-out infinite;
+}
+
+@keyframes gradient-pulse {
+  0%, 100% {
+    background: var(--gradient-urgency);
+  }
+  50% {
+    background: var(--gradient-urgency-pulse);
+    transform: scale(1.02);
+  }
+}
+
+/* ========================================
+   Mesh Gradient Background
+   ======================================== */
+
+.bg-gradient-mesh {
+  background: 
+    var(--gradient-mesh),
+    linear-gradient(135deg, #6366F1 0%, #8B5CF6 100%);
+}
+
+/* ========================================
+   Skeleton Gradient (Loading State)
+   ======================================== */
+
+.skeleton-gradient {
+  background: linear-gradient(
+    90deg,
+    #F3F4F6 0%,
+    #E5E7EB 50%,
+    #F3F4F6 100%
+  );
+  background-size: 200% 100%;
+  animation: skeleton-loading 1.5s ease-in-out infinite;
+}
+
+@keyframes skeleton-loading {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+/* ========================================
+   Mobile Optimizations
+   ======================================== */
+
+@media screen and (max-width: 749px) {
+  /* Simplify mesh gradients on mobile for better performance */
+  :root {
+    --gradient-mesh: linear-gradient(135deg, rgba(99, 102, 241, 0.1) 0%, rgba(236, 72, 153, 0.05) 100%);
+  }
+  
+  /* Slower animations for less CPU usage */
+  .gradient-text-animate {
+    animation-duration: 6s;
+  }
+  
+  .button-gradient-primary::before {
+    animation-duration: 3s;
+  }
+  
+  /* Use simpler backgrounds for small badges */
+  .badge-gradient-sale,
+  .badge-gradient-new,
+  .badge-gradient-featured {
+    background: #EF4444; /* Solid fallback */
+  }
+  
+  .badge-gradient-new {
+    background: #10B981;
+  }
+  
+  .badge-gradient-featured {
+    background: #EC4899;
+  }
+}
+
+/* ========================================
+   Reduced Motion Accessibility
+   ======================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  .gradient-animate,
+  .gradient-shimmer,
+  .gradient-pulse,
+  .gradient-text-animate,
+  [class*="gradient-"][class*="animate"],
+  .button-gradient-primary::before,
+  .skeleton-gradient {
+    animation: none !important;
+    transition: none !important;
+  }
+  
+  .gradient-hover:hover {
+    transform: none;
+  }
+  
+  .button-gradient-primary:hover {
+    transform: none;
+  }
+}
+
+/* ========================================
+   High Contrast Mode Support
+   ======================================== */
+
+@media (prefers-contrast: high) {
+  .gradient-text-primary,
+  .gradient-text-accent,
+  .gradient-text-valentine {
+    -webkit-text-fill-color: currentColor;
+    background: none;
+    color: #6366F1;
+    font-weight: 900;
+  }
+  
+  .gradient-text-accent {
+    color: #EC4899;
+  }
+}
+
+/* ========================================
+   Print Styles (Remove gradients)
+   ======================================== */
+
+@media print {
+  [class*="gradient-"] {
+    background: white !important;
+    color: black !important;
+    box-shadow: none !important;
+  }
+  
+  .gradient-text-primary,
+  .gradient-text-accent,
+  .gradient-text-valentine {
+    -webkit-text-fill-color: black;
+    color: black;
+  }
+}
+
+/* ========================================
+   Focus States (Accessibility)
+   ======================================== */
+
+.button-gradient-primary:focus-visible,
+.button-gradient-secondary:focus-visible,
+.gradient-hover:focus-visible {
+  outline: 3px solid #6366F1;
+  outline-offset: 2px;
+}
+
+/* ========================================
+   Dark Mode Support (Optional)
+   ======================================== */
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --gradient-neutral: linear-gradient(135deg, #1F2937 0%, #111827 100%);
+    --gradient-neutral-reverse: linear-gradient(135deg, #111827 0%, #1F2937 100%);
+  }
+  
+  .gradient-border {
+    background: #1F2937;
+  }
+  
+  .card-gradient-hover {
+    background: var(--gradient-neutral);
+  }
+}
+
+/* ========================================
+   Performance Optimization
+   ======================================== */
+
+/* Force GPU acceleration for gradient animations */
+.gradient-animate,
+.button-gradient-primary,
+.card-gradient-hover,
+.gradient-hover {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  perspective: 1000px;
+}
+
+/* Optimize repaints */
+[class*="gradient-"][class*="hover"]:hover {
+  will-change: transform, box-shadow;
+}
+
+/* Cleanup after interaction */
+[class*="gradient-"][class*="hover"]:not(:hover) {
+  will-change: auto;
+}

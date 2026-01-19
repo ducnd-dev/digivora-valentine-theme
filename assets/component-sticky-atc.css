@@ -1,0 +1,107 @@
+/* ============================================
+   STICKY ADD TO CART - MOBILE
+   ============================================ */
+
+.sticky-atc-mobile {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: white;
+  padding: 1rem;
+  box-shadow: 0 -4px 16px rgba(0, 0, 0, 0.15);
+  z-index: 999;
+  transform: translateY(100%);
+  transition: transform 0.3s ease;
+  display: none;
+}
+
+.sticky-atc-mobile.show {
+  transform: translateY(0);
+}
+
+.sticky-atc-mobile__content {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  max-width: 750px;
+  margin: 0 auto;
+}
+
+.sticky-atc-mobile__image {
+  width: 60px;
+  height: 60px;
+  border-radius: 8px;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.sticky-atc-mobile__image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.sticky-atc-mobile__info {
+  flex: 1;
+  min-width: 0;
+}
+
+.sticky-atc-mobile__title {
+  font-size: 14px;
+  font-weight: 600;
+  color: rgb(var(--color-foreground));
+  margin: 0 0 0.25rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.sticky-atc-mobile__price {
+  font-size: 16px;
+  font-weight: 700;
+  color: rgb(99, 102, 241);
+  margin: 0;
+}
+
+.sticky-atc-mobile__button {
+  flex-shrink: 0;
+}
+
+.sticky-atc-mobile__button .button {
+  background: rgb(99, 102, 241);
+  color: white;
+  border: none;
+  padding: 0.875rem 1.5rem;
+  font-size: 15px;
+  font-weight: 600;
+  border-radius: 8px;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.sticky-atc-mobile__button .button:hover {
+  background: rgb(79, 82, 221);
+  transform: translateY(-2px);
+}
+
+.sticky-atc-mobile__button .button:disabled {
+  background: rgba(var(--color-foreground), 0.2);
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Only show on mobile */
+@media screen and (max-width: 749px) {
+  .sticky-atc-mobile {
+    display: block;
+  }
+}
+
+/* Hide on desktop */
+@media screen and (min-width: 750px) {
+  .sticky-atc-mobile {
+    display: none !important;
+  }
+}

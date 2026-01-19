@@ -1,0 +1,212 @@
+{% comment %}
+  Lazy Load Images Component
+  Improves page load performance by deferring image loading
+  Uses Intersection Observer API for native lazy loading
+  
+  Usage: Include once per page (already in theme.liquid)
+{% endcomment %}
+
+<script>
+(function() {
+  'use strict';
+
+  /**
+   * Lazy Loading Images with Intersection Observer
+   */
+  class LazyLoadImages {
+    constructor() {
+      this.images = document.querySelectorAll('img[data-src], img[loading="lazy"]');
+      this.config = {
+        rootMargin: '50px 0px',
+        threshold: 0.01
+      };
+      
+      if ('IntersectionObserver' in window) {
+        this.observer = new IntersectionObserver(this.onIntersection.bind(this), this.config);
+        this.images.forEach(img => this.observer.observe(img));
+      } else {
+        // Fallback for older browsers
+        this.loadAllImages();
+      }
+    }
+
+    /**
+     * Handle intersection callback
+     */
+    onIntersection(entries) {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          this.loadImage(entry.target);
+          this.observer.unobserve(entry.target);
+        }
+      });
+    }
+
+    /**
+     * Load individual image
+     */
+    loadImage(img) {
+      const src = img.dataset.src || img.src;
+      const srcset = img.dataset.srcset;
+      
+      if (!src) return;
+
+      // Create new image to test load
+      const tempImg = new Image();
+      
+      tempImg.onload = () => {
+        img.src = src;
+        if (srcset) {
+          img.srcset = srcset;
+        }
+        img.classList.add('loaded');
+        img.removeAttribute('data-src');
+        img.removeAttribute('data-srcset');
+      };
+
+      tempImg.onerror = () => {
+        console.warn('Failed to load image:', src);
+        img.classList.add('error');
+      };
+
+      tempImg.src = src;
+    }
+
+    /**
+     * Load all images immediately (fallback)
+     */
+    loadAllImages() {
+      this.images.forEach(img => this.loadImage(img));
+    }
+
+    /**
+     * Update for dynamically added images
+     */
+    update() {
+      const newImages = document.querySelectorAll('img[data-src]:not(.loaded):not(.error)');
+      newImages.forEach(img => this.observer.observe(img));
+    }
+  }
+
+  /**
+   * Preload critical images
+   */
+  function preloadCriticalImages() {
+    // Preload hero images and first product images
+    const criticalImages = document.querySelectorAll('.hero__image img, .product-grid .card-product:nth-child(-n+4) img');
+    
+    criticalImages.forEach(img => {
+      const src = img.dataset.src || img.src;
+      if (src) {
+        const link = document.createElement('link');
+        link.rel = 'preload';
+        link.as = 'image';
+        link.href = src;
+        document.head.appendChild(link);
+      }
+    });
+  }
+
+  /**
+   * Optimize image quality based on device
+   */
+  function optimizeImageQuality() {
+    const images = document.querySelectorAll('img[data-sizes]');
+    const devicePixelRatio = window.devicePixelRatio || 1;
+    
+    images.forEach(img => {
+      const sizes = img.dataset.sizes;
+      if (sizes) {
+        // Adjust image sizes based on DPR
+        img.sizes = devicePixelRatio > 1 ? `(max-width: 749px) 100vw, 50vw` : sizes;
+      }
+    });
+  }
+
+  /**
+   * Add blur-up effect
+   */
+  function addBlurUpEffect() {
+    const style = document.createElement('style');
+    style.textContent = `
+      img[data-src]:not(.loaded) {
+        filter: blur(10px);
+        transition: filter 0.3s ease;
+      }
+      
+      img.loaded {
+        filter: blur(0);
+      }
+      
+      img.error {
+        background: rgba(var(--color-foreground), 0.05);
+      }
+    `;
+    document.head.appendChild(style);
+  }
+
+  // Initialize
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', () => {
+      const lazyLoader = new LazyLoadImages();
+      preloadCriticalImages();
+      optimizeImageQuality();
+      addBlurUpEffect();
+      
+      // Make lazyLoader globally accessible for dynamic content
+      window.lazyLoader = lazyLoader;
+    });
+  } else {
+    const lazyLoader = new LazyLoadImages();
+    preloadCriticalImages();
+    optimizeImageQuality();
+    addBlurUpEffect();
+    window.lazyLoader = lazyLoader;
+  }
+
+  /**
+   * Observe for dynamically added content
+   */
+  const contentObserver = new MutationObserver(() => {
+    if (window.lazyLoader) {
+      window.lazyLoader.update();
+    }
+  });
+
+  contentObserver.observe(document.body, {
+    childList: true,
+    subtree: true
+  });
+
+})();
+</script>
+
+<style>
+  /* Image loading states */
+  img[data-src] {
+    background: linear-gradient(135deg, rgba(99, 102, 241, 0.05) 0%, rgba(236, 72, 153, 0.05) 100%);
+  }
+  
+  /* Skeleton loader for images */
+  .image-loading {
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .image-loading::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+    animation: shimmer 1.5s infinite;
+  }
+  
+  @keyframes shimmer {
+    to {
+      left: 100%;
+    }
+  }
+</style>

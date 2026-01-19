@@ -1,0 +1,108 @@
+{% comment %}
+  Sticky Add to Cart - Mobile Only
+  Shows fixed add to cart bar at bottom of screen on mobile
+  
+  Usage: {% render 'sticky-atc-mobile', product: product %}
+{% endcomment %}
+
+<div class="sticky-atc-mobile" id="sticky-atc-mobile">
+  <div class="sticky-atc-mobile__content">
+    <div class="sticky-atc-mobile__image">
+      {%- if product.featured_media -%}
+        <img 
+          src="{{ product.featured_media | image_url: width: 120 }}" 
+          alt="{{ product.featured_media.alt | escape }}"
+          loading="lazy"
+        >
+      {%- endif -%}
+    </div>
+    
+    <div class="sticky-atc-mobile__info">
+      <h3 class="sticky-atc-mobile__title">{{ product.title | escape }}</h3>
+      <div class="sticky-atc-mobile__price" id="sticky-price">
+        <span class="price-item">
+          {{ product.selected_or_first_available_variant.price | money }}
+        </span>
+      </div>
+    </div>
+    
+    <div class="sticky-atc-mobile__button">
+      <button 
+        type="button" 
+        class="button" 
+        id="sticky-add-to-cart"
+        {% unless product.selected_or_first_available_variant.available %}disabled{% endunless %}
+      >
+        {%- if product.selected_or_first_available_variant.available -%}
+          Add to Cart
+        {%- else -%}
+          Sold Out
+        {%- endif -%}
+      </button>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Sticky Add to Cart functionality
+  (function() {
+    const stickyBar = document.getElementById('sticky-atc-mobile');
+    const stickyButton = document.getElementById('sticky-add-to-cart');
+    const mainAddToCart = document.querySelector('[name="add"]');
+    const productForm = document.querySelector('product-form form');
+    
+    if (!stickyBar || !mainAddToCart) return;
+    
+    // Show/hide sticky bar based on scroll
+    let lastScroll = 0;
+    const productInfo = document.querySelector('.product__info-wrapper');
+    
+    if (productInfo) {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            stickyBar.classList.remove('show');
+          } else if (window.scrollY > lastScroll) {
+            // Scrolling down and product info is out of view
+            stickyBar.classList.add('show');
+          }
+          lastScroll = window.scrollY;
+        });
+      }, {
+        threshold: 0,
+        rootMargin: '50px'
+      });
+      
+      observer.observe(productInfo);
+    }
+    
+    // Click sticky button to trigger main add to cart
+    stickyButton.addEventListener('click', function() {
+      if (mainAddToCart && !mainAddToCart.disabled) {
+        mainAddToCart.click();
+      }
+    });
+    
+    // Update sticky price when variant changes
+    if (typeof PUB_SUB_EVENTS !== 'undefined') {
+      subscribe(PUB_SUB_EVENTS.variantChange, (data) => {
+        const stickyPrice = document.getElementById('sticky-price');
+        const stickyBtn = document.getElementById('sticky-add-to-cart');
+        
+        if (data.variant && stickyPrice) {
+          stickyPrice.innerHTML = `<span class="price-item">${Shopify.formatMoney(data.variant.price, theme.moneyFormat || '{{amount}}')}</span>`;
+          
+          if (stickyBtn) {
+            if (data.variant.available) {
+              stickyBtn.disabled = false;
+              stickyBtn.textContent = 'Add to Cart';
+            } else {
+              stickyBtn.disabled = true;
+              stickyBtn.textContent = 'Sold Out';
+            }
+          }
+        }
+      });
+    }
+  })();
+</script>

@@ -23,7 +23,40 @@ variant-selects {
 }
 
 :is(.product-form__input--pill, .product-form__input--swatch) .form__label {
-  margin-bottom: 0.2rem;
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 14px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.size-guide-trigger {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  font-size: 13px;
+  font-weight: 500;
+  color: rgb(99, 102, 241);
+  text-transform: none;
+  letter-spacing: 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+}
+
+.size-guide-trigger:hover {
+  background-color: rgba(99, 102, 241, 0.08);
+  text-decoration: underline;
+}
+
+.size-guide-trigger svg {
+  flex-shrink: 0;
 }
 
 .product-form__input input[type='radio'] {
@@ -117,7 +150,7 @@ variant-selects {
 .product-form__input--pill input[type='radio']:disabled + label,
 .product-form__input--pill input[type='radio'].disabled + label {
   border-color: rgba(var(--color-foreground), 0.1);
-  color: rgba(var(--color-foreground), 0.6);
+  color: rgba(var(--color-foreground), 0.75);
   text-decoration: line-through;
 }
 
@@ -140,14 +173,46 @@ variant-selects {
 }
 /* End custom styles for Pill display type  */
 
-/* Custom styles for Swatch display type */
+/* Custom styles for Swatch display type (Color swatches) */
 .product-form__input--swatch {
   display: flex;
   flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 2rem;
 }
 
 .product-form__input--swatch .swatch-input__input + .swatch-input__label {
-  margin: 0.7rem 1.2rem 0.2rem 0;
+  margin: 0;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: 3px solid transparent;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  position: relative;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.product-form__input--swatch .swatch-input__input + .swatch-input__label::after {
+  content: '';
+  position: absolute;
+  inset: -6px;
+  border: 2px solid transparent;
+  border-radius: 50%;
+  transition: border-color 0.2s ease;
+}
+
+.product-form__input--swatch .swatch-input__input + .swatch-input__label:hover {
+  transform: scale(1.1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.product-form__input--swatch .swatch-input__input:checked + .swatch-input__label {
+  border-color: rgb(99, 102, 241);
+}
+
+.product-form__input--swatch .swatch-input__input:checked + .swatch-input__label::after {
+  border-color: rgb(99, 102, 241);
 }
 
 @media screen and (min-width: 750px) {

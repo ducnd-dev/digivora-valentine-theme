@@ -1,0 +1,277 @@
+{% comment %}
+  Cross-Sell Products Component
+  Displays "Available on Other Products" section with recommended items
+  
+  Parameters:
+  - product: Current product object
+  - limit: Number of products to show (default: 6)
+  - heading: Section heading (default: "Available on Other Products")
+{% endcomment %}
+
+{%- liquid
+  assign limit = limit | default: 6
+  assign heading = heading | default: "Available on Other Products"
+  
+  # Try to get recommendations from Shopify's recommendation API
+  assign recommendations = product.metafields.shopify.recommendations | default: false
+  
+  # Fallback: Get products from same collection
+  if recommendations == false
+    assign recommendations = collections.all.products | where: "available" | limit: limit
+  endif
+-%}
+
+<div class="cross-sell-products-pod">
+  <div class="page-width">
+    <div class="cross-sell-products__header">
+      <h2 class="cross-sell-products__heading">{{ heading }}</h2>
+      <p class="cross-sell-products__subtitle">Get the same design on different products</p>
+    </div>
+
+    <div class="cross-sell-products__grid">
+      {%- if recommendations.size > 0 -%}
+        {%- for recommended_product in recommendations limit: limit -%}
+          {%- unless recommended_product.id == product.id -%}
+            <div class="cross-sell-product-card">
+              <a href="{{ recommended_product.url }}" class="cross-sell-product-card__link">
+                <div class="cross-sell-product-card__image-wrapper">
+                  {%- if recommended_product.featured_media -%}
+                    <img
+                      src="{{ recommended_product.featured_media | image_url: width: 400 }}"
+                      alt="{{ recommended_product.featured_media.alt | escape }}"
+                      loading="lazy"
+                      width="400"
+                      height="400"
+                      class="cross-sell-product-card__image"
+                    >
+                  {%- else -%}
+                    <div class="cross-sell-product-card__placeholder">
+                      {%- render 'icon-product' -%}
+                    </div>
+                  {%- endif -%}
+                  
+                  {%- if recommended_product.compare_at_price > recommended_product.price -%}
+                    <span class="cross-sell-product-card__badge badge--sale">Sale</span>
+                  {%- endif -%}
+                </div>
+
+                <div class="cross-sell-product-card__info">
+                  <h3 class="cross-sell-product-card__title">{{ recommended_product.title | truncate: 50 }}</h3>
+                  
+                  <div class="cross-sell-product-card__price">
+                    {%- if recommended_product.compare_at_price > recommended_product.price -%}
+                      <span class="price-compare">
+                        <s>{{ recommended_product.compare_at_price | money }}</s>
+                      </span>
+                    {%- endif -%}
+                    <span class="price-current">{{ recommended_product.price | money }}</span>
+                  </div>
+
+                  {%- if recommended_product.metafields.reviews.rating.value -%}
+                    <div class="cross-sell-product-card__rating">
+                      {%- assign rating = recommended_product.metafields.reviews.rating.value | default: 4.8 -%}
+                      {%- assign full_stars = rating | floor -%}
+                      {%- for i in (1..full_stars) -%}
+                        <span class="star star--full">★</span>
+                      {%- endfor -%}
+                      {%- assign remaining = 5 | minus: full_stars -%}
+                      {%- for i in (1..remaining) -%}
+                        <span class="star star--empty">☆</span>
+                      {%- endfor -%}
+                      <span class="rating-value">({{ rating }})</span>
+                    </div>
+                  {%- endif -%}
+                </div>
+
+                <button type="button" class="cross-sell-product-card__quick-view" 
+                        data-product-id="{{ recommended_product.id }}">
+                  Quick View
+                </button>
+              </a>
+            </div>
+          {%- endunless -%}
+        {%- endfor -%}
+      {%- else -%}
+        <p class="cross-sell-products__empty">No recommendations available</p>
+      {%- endif -%}
+    </div>
+
+    {%- if recommendations.size > limit -%}
+      <div class="cross-sell-products__footer">
+        <a href="{{ collections.all.url }}" class="button button--secondary">
+          View All Products
+        </a>
+      </div>
+    {%- endif -%}
+  </div>
+</div>
+
+<style>
+  .cross-sell-products-pod {
+    padding: 4rem 0;
+    background: linear-gradient(135deg, 
+      rgba(99, 102, 241, 0.02) 0%, 
+      rgba(236, 72, 153, 0.02) 100%
+    );
+  }
+
+  .cross-sell-products__header {
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+
+  .cross-sell-products__heading {
+    font-size: clamp(28px, 3.5vw, 40px);
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+  }
+
+  .cross-sell-products__subtitle {
+    font-size: 1rem;
+    color: rgba(var(--color-foreground), 0.7);
+  }
+
+  .cross-sell-products__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 2rem;
+  }
+
+  .cross-sell-product-card {
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+  }
+
+  .cross-sell-product-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.12);
+  }
+
+  .cross-sell-product-card__link {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .cross-sell-product-card__image-wrapper {
+    position: relative;
+    aspect-ratio: 1;
+    overflow: hidden;
+  }
+
+  .cross-sell-product-card__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+  }
+
+  .cross-sell-product-card:hover .cross-sell-product-card__image {
+    transform: scale(1.05);
+  }
+
+  .cross-sell-product-card__badge {
+    position: absolute;
+    top: 0.75rem;
+    right: 0.75rem;
+    background: rgb(239, 68, 68);
+    color: white;
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 600;
+  }
+
+  .cross-sell-product-card__info {
+    padding: 1rem;
+  }
+
+  .cross-sell-product-card__title {
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    line-height: 1.4;
+  }
+
+  .cross-sell-product-card__price {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .price-compare {
+    color: rgba(var(--color-foreground), 0.5);
+    font-size: 0.875rem;
+  }
+
+  .price-current {
+    color: rgb(99, 102, 241);
+    font-size: 1.125rem;
+    font-weight: 700;
+  }
+
+  .cross-sell-product-card__rating {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    font-size: 0.875rem;
+  }
+
+  .star--full {
+    color: #F59E0B;
+  }
+
+  .star--empty {
+    color: rgba(0, 0, 0, 0.2);
+  }
+
+  .rating-value {
+    color: rgba(var(--color-foreground), 0.6);
+    margin-left: 0.25rem;
+  }
+
+  .cross-sell-product-card__quick-view {
+    width: 100%;
+    padding: 0.75rem;
+    background: rgb(99, 102, 241);
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background 0.3s ease;
+  }
+
+  .cross-sell-product-card__quick-view:hover {
+    background: rgb(79, 70, 229);
+  }
+
+  .cross-sell-products__footer {
+    text-align: center;
+    margin-top: 3rem;
+  }
+
+  @media screen and (max-width: 989px) {
+    .cross-sell-products__grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.5rem;
+    }
+  }
+
+  @media screen and (max-width: 749px) {
+    .cross-sell-products-pod {
+      padding: 3rem 0;
+    }
+
+    .cross-sell-products__grid {
+      gap: 1rem;
+    }
+
+    .cross-sell-product-card__info {
+      padding: 0.75rem;
+    }
+  }
+</style>

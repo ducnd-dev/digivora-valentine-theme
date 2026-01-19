@@ -1,0 +1,544 @@
+{% comment %}
+  Quick Add to Cart Component
+  Allows adding products to cart directly from collection page without visiting product page
+  
+  Parameters:
+  - product: Product object
+  - card_product: Alternative product object parameter
+{% endcomment %}
+
+{%- liquid
+  assign product_to_use = product | default: card_product
+  assign product_form_id = 'quick-add-' | append: section_id | append: product_to_use.id
+-%}
+
+<div class="quick-add-pod" data-product-id="{{ product_to_use.id }}">
+  <button
+    type="button"
+    class="quick-add-pod__button"
+    data-quick-add-trigger="{{ product_to_use.id }}"
+    aria-label="Quick add {{ product_to_use.title }} to cart"
+  >
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <circle cx="9" cy="21" r="1"></circle>
+      <circle cx="20" cy="21" r="1"></circle>
+      <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+    </svg>
+    <span>Quick Add</span>
+  </button>
+
+  {%- comment -%} Quick Add Modal {%- endcomment -%}
+  <dialog class="quick-add-pod__modal" id="quick-add-modal-{{ product_to_use.id }}" data-quick-add-modal>
+    <div class="quick-add-pod__modal-content">
+      <button
+        type="button"
+        class="quick-add-pod__close"
+        data-quick-add-close
+        aria-label="Close quick add"
+      >
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+
+      <div class="quick-add-pod__product">
+        <div class="quick-add-pod__image">
+          {%- if product_to_use.featured_media -%}
+            <img
+              src="{{ product_to_use.featured_media | image_url: width: 400 }}"
+              alt="{{ product_to_use.featured_media.alt | escape }}"
+              loading="lazy"
+              width="400"
+              height="400"
+            >
+          {%- endif -%}
+        </div>
+
+        <div class="quick-add-pod__info">
+          <h3 class="quick-add-pod__title">{{ product_to_use.title }}</h3>
+          
+          <div class="quick-add-pod__price">
+            {%- if product_to_use.compare_at_price > product_to_use.price -%}
+              <span class="price-compare">
+                <s>{{ product_to_use.compare_at_price | money }}</s>
+              </span>
+            {%- endif -%}
+            <span class="price-current" data-quick-add-price>{{ product_to_use.price | money }}</span>
+          </div>
+
+          {%- if product_to_use.metafields.reviews.rating.value -%}
+            <div class="quick-add-pod__rating">
+              {%- assign rating = product_to_use.metafields.reviews.rating.value | default: 4.8 -%}
+              {%- assign full_stars = rating | floor -%}
+              {%- for i in (1..full_stars) -%}
+                <span class="star">★</span>
+              {%- endfor -%}
+              <span class="rating-value">({{ rating }})</span>
+            </div>
+          {%- endif -%}
+
+          <product-form class="quick-add-pod__form">
+            {%- form 'product', product_to_use, id: product_form_id, class: 'form', novalidate: 'novalidate', data-type: 'add-to-cart-form' -%}
+              <input type="hidden" name="id" value="{{ product_to_use.selected_or_first_available_variant.id }}" data-quick-add-variant-id>
+
+              {%- unless product_to_use.has_only_default_variant -%}
+                {%- for option in product_to_use.options_with_values -%}
+                  <div class="quick-add-pod__option">
+                    <label class="quick-add-pod__option-label">
+                      {{ option.name }}
+                    </label>
+                    
+                    {%- if option.name == 'Color' or option.name == 'Colour' -%}
+                      <div class="quick-add-pod__swatches" data-option-name="{{ option.name }}">
+                        {%- for value in option.values -%}
+                          <input
+                            type="radio"
+                            id="{{ product_form_id }}-{{ option.position }}-{{ forloop.index0 }}"
+                            name="option{{ option.position }}"
+                            value="{{ value | escape }}"
+                            class="quick-add-pod__swatch-input"
+                            {% if option.selected_value == value %}checked{% endif %}
+                            data-quick-add-option
+                          >
+                          <label
+                            for="{{ product_form_id }}-{{ option.position }}-{{ forloop.index0 }}"
+                            class="quick-add-pod__swatch"
+                            style="background-color: {{ value | handle | remove: '-' }};"
+                            title="{{ value }}"
+                          >
+                            <span class="visually-hidden">{{ value }}</span>
+                          </label>
+                        {%- endfor -%}
+                      </div>
+                    {%- else -%}
+                      <div class="quick-add-pod__select-wrapper">
+                        <select
+                          name="option{{ option.position }}"
+                          class="quick-add-pod__select"
+                          data-quick-add-option
+                        >
+                          {%- for value in option.values -%}
+                            <option
+                              value="{{ value | escape }}"
+                              {% if option.selected_value == value %}selected="selected"{% endif %}
+                            >
+                              {{ value }}
+                            </option>
+                          {%- endfor -%}
+                        </select>
+                      </div>
+                    {%- endif -%}
+                  </div>
+                {%- endfor -%}
+              {%- endunless -%}
+
+              <div class="quick-add-pod__quantity">
+                <label for="{{ product_form_id }}-quantity" class="quick-add-pod__quantity-label">
+                  Quantity
+                </label>
+                <div class="quick-add-pod__quantity-selector">
+                  <button type="button" class="quick-add-pod__quantity-btn" data-quantity-decrease aria-label="Decrease quantity">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <line x1="5" y1="12" x2="19" y2="12"></line>
+                    </svg>
+                  </button>
+                  <input
+                    type="number"
+                    id="{{ product_form_id }}-quantity"
+                    name="quantity"
+                    value="1"
+                    min="1"
+                    class="quick-add-pod__quantity-input"
+                    data-quick-add-quantity
+                  >
+                  <button type="button" class="quick-add-pod__quantity-btn" data-quantity-increase aria-label="Increase quantity">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <line x1="12" y1="5" x2="12" y2="19"></line>
+                      <line x1="5" y1="12" x2="19" y2="12"></line>
+                    </svg>
+                  </button>
+                </div>
+              </div>
+
+              <button
+                type="submit"
+                name="add"
+                class="quick-add-pod__add-button"
+                data-quick-add-submit
+                {% unless product_to_use.selected_or_first_available_variant.available %}disabled{% endunless %}
+              >
+                <span data-quick-add-button-text>
+                  {%- if product_to_use.selected_or_first_available_variant.available -%}
+                    Add to Cart
+                  {%- else -%}
+                    Sold Out
+                  {%- endif -%}
+                </span>
+                <span class="loading-spinner" style="display: none;">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10" opacity="0.25"></circle>
+                    <path d="M12 2a10 10 0 0 1 10 10" opacity="0.75"></path>
+                  </svg>
+                </span>
+              </button>
+
+              <div class="quick-add-pod__error" data-quick-add-error style="display: none;"></div>
+
+              <a href="{{ product_to_use.url }}" class="quick-add-pod__view-full">
+                View full details
+              </a>
+            {%- endform -%}
+          </product-form>
+        </div>
+      </div>
+    </div>
+  </dialog>
+</div>
+
+<style>
+  .quick-add-pod__button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    width: 100%;
+    padding: 0.75rem 1rem;
+    background: var(--gradient-primary);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 0.875rem;
+    transition: all 0.3s ease;
+    margin-top: 0.75rem;
+    position: relative;
+    overflow: hidden;
+    transform: translateZ(0);
+  }
+
+  .quick-add-pod__button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: var(--gradient-shimmer);
+    animation: shimmer 2.5s infinite;
+  }
+
+  .quick-add-pod__button:hover {
+    background: var(--gradient-primary-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(99, 102, 241, 0.4);
+  }
+
+  .quick-add-pod__button svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  /* Modal */
+  .quick-add-pod__modal {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.75);
+    backdrop-filter: blur(4px);
+    border: none;
+    padding: 0;
+    margin: 0;
+    display: none;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .quick-add-pod__modal[open] {
+    display: flex;
+  }
+
+  .quick-add-pod__modal-content {
+    position: relative;
+    width: 90%;
+    max-width: 600px;
+    max-height: 90vh;
+    background: white;
+    border-radius: 16px;
+    overflow-y: auto;
+    animation: slideUp 0.3s ease;
+  }
+
+  @keyframes slideUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .quick-add-pod__close {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    z-index: 10;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.05);
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .quick-add-pod__close:hover {
+    background: rgba(0, 0, 0, 0.1);
+    transform: rotate(90deg);
+  }
+
+  .quick-add-pod__product {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 2rem;
+    padding: 2rem;
+  }
+
+  .quick-add-pod__image {
+    position: relative;
+    aspect-ratio: 1;
+    overflow: hidden;
+    border-radius: 12px;
+  }
+
+  .quick-add-pod__image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .quick-add-pod__title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-bottom: 0.75rem;
+    line-height: 1.3;
+  }
+
+  .quick-add-pod__price {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .price-compare {
+    color: rgba(var(--color-foreground), 0.5);
+    font-size: 1rem;
+  }
+
+  .price-current {
+    color: rgb(99, 102, 241);
+    font-size: 1.5rem;
+    font-weight: 700;
+  }
+
+  .quick-add-pod__rating {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    margin-bottom: 1.5rem;
+    font-size: 0.875rem;
+  }
+
+  .quick-add-pod__rating .star {
+    color: #F59E0B;
+  }
+
+  .rating-value {
+    color: rgba(var(--color-foreground), 0.6);
+    margin-left: 0.25rem;
+  }
+
+  .quick-add-pod__option {
+    margin-bottom: 1.25rem;
+  }
+
+  .quick-add-pod__option-label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    font-size: 0.875rem;
+  }
+
+  .quick-add-pod__swatches {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .quick-add-pod__swatch-input {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .quick-add-pod__swatch {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 2px solid rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .quick-add-pod__swatch-input:checked + .quick-add-pod__swatch {
+    border-color: rgb(99, 102, 241);
+    box-shadow: 0 0 0 2px white, 0 0 0 4px rgb(99, 102, 241);
+  }
+
+  .quick-add-pod__swatch:hover {
+    transform: scale(1.1);
+  }
+
+  .quick-add-pod__select-wrapper {
+    position: relative;
+  }
+
+  .quick-add-pod__select {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    font-size: 0.875rem;
+    cursor: pointer;
+  }
+
+  .quick-add-pod__quantity {
+    margin-bottom: 1.5rem;
+  }
+
+  .quick-add-pod__quantity-label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    font-size: 0.875rem;
+  }
+
+  .quick-add-pod__quantity-selector {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    width: fit-content;
+  }
+
+  .quick-add-pod__quantity-btn {
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(99, 102, 241, 0.1);
+    border: 1px solid rgba(99, 102, 241, 0.3);
+    border-radius: 8px;
+    cursor: pointer;
+    color: rgb(99, 102, 241);
+    transition: all 0.3s ease;
+  }
+
+  .quick-add-pod__quantity-btn:hover {
+    background: rgba(99, 102, 241, 0.2);
+  }
+
+  .quick-add-pod__quantity-input {
+    width: 60px;
+    height: 36px;
+    text-align: center;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    font-weight: 600;
+  }
+
+  .quick-add-pod__add-button {
+    width: 100%;
+    padding: 1rem;
+    background: rgb(99, 102, 241);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 700;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .quick-add-pod__add-button:hover:not(:disabled) {
+    background: rgb(79, 70, 229);
+  }
+
+  .quick-add-pod__add-button:disabled {
+    background: rgba(0, 0, 0, 0.3);
+    cursor: not-allowed;
+  }
+
+  .loading-spinner svg {
+    animation: spin 1s linear infinite;
+  }
+
+  @keyframes spin {
+    to { transform: rotate(360deg); }
+  }
+
+  .quick-add-pod__error {
+    padding: 0.75rem;
+    background: rgba(239, 68, 68, 0.1);
+    border: 1px solid rgba(239, 68, 68, 0.3);
+    border-radius: 8px;
+    color: rgb(185, 28, 28);
+    font-size: 0.875rem;
+    margin-bottom: 1rem;
+  }
+
+  .quick-add-pod__view-full {
+    display: block;
+    text-align: center;
+    color: rgb(99, 102, 241);
+    text-decoration: none;
+    font-size: 0.875rem;
+    font-weight: 600;
+  }
+
+  .quick-add-pod__view-full:hover {
+    text-decoration: underline;
+  }
+
+  @media screen and (max-width: 749px) {
+    .quick-add-pod__product {
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+      padding: 1.5rem;
+    }
+
+    .quick-add-pod__image {
+      max-width: 300px;
+      margin: 0 auto;
+    }
+  }
+</style>
+
+<script src="{{ 'quick-add-pod.js' | asset_url }}" defer="defer"></script>

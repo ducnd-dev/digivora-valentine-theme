@@ -1,0 +1,248 @@
+{% comment %}
+  Urgency Indicators Component
+  Shows stock level, viewer count, and recent purchases to create urgency
+  
+  Parameters:
+  - product: Product object
+  - inventory_threshold: Show low stock when below this number (default: 10)
+  - show_viewers: Show live viewer count (default: true)
+  - show_recent_purchase: Show recent purchase notification (default: true)
+{% endcomment %}
+
+{%- liquid
+  assign inventory_threshold = inventory_threshold | default: 10
+  assign show_viewers = show_viewers | default: true
+  assign show_recent_purchase = show_recent_purchase | default: true
+  
+  # Calculate total inventory for current product
+  assign total_inventory = 0
+  for variant in product.variants
+    if variant.inventory_management == 'shopify'
+      assign total_inventory = total_inventory | plus: variant.inventory_quantity
+    endif
+  endfor
+  
+  # Generate random viewer count (2-15 for realism)
+  assign random_seed = product.id | modulo: 14 | plus: 2
+  assign viewer_count = random_seed
+  
+  # Determine if stock is low
+  assign is_low_stock = false
+  if total_inventory > 0 and total_inventory <= inventory_threshold
+    assign is_low_stock = true
+  endif
+-%}
+
+<div class="urgency-indicators-pod" data-product-id="{{ product.id }}">
+  {%- if is_low_stock -%}
+    <div class="urgency-indicator urgency-indicator--stock" data-urgency-type="low-stock">
+      <svg class="urgency-indicator__icon" width="20" height="20" viewBox="0 0 20 20" fill="none">
+        <path d="M10 2L3 7V13C3 16.314 6.686 18 10 18C13.314 18 17 16.314 17 13V7L10 2Z" 
+              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M10 10V14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        <circle cx="10" cy="7" r="1" fill="currentColor"/>
+      </svg>
+      <div class="urgency-indicator__content">
+        <strong>Only {{ total_inventory }} left in stock!</strong>
+        <span>Order soon before it's gone</span>
+      </div>
+    </div>
+  {%- endif -%}
+
+  {%- if show_viewers -%}
+    <div class="urgency-indicator urgency-indicator--viewers" data-urgency-type="viewers">
+      <svg class="urgency-indicator__icon" width="20" height="20" viewBox="0 0 20 20" fill="none">
+        <path d="M10 12C11.6569 12 13 10.6569 13 9C13 7.34315 11.6569 6 10 6C8.34315 6 7 7.34315 7 9C7 10.6569 8.34315 12 10 12Z" 
+              stroke="currentColor" stroke-width="2"/>
+        <path d="M2 9C2 9 5 3 10 3C15 3 18 9 18 9C18 9 15 15 10 15C5 15 2 9 2 9Z" 
+              stroke="currentColor" stroke-width="2"/>
+      </svg>
+      <div class="urgency-indicator__content">
+        <strong class="viewer-count" data-base-count="{{ viewer_count }}">{{ viewer_count }}</strong>
+        <span>people are viewing this right now</span>
+      </div>
+      <span class="live-badge">● LIVE</span>
+    </div>
+  {%- endif -%}
+
+  {%- if show_recent_purchase -%}
+    <div class="urgency-indicator urgency-indicator--purchase" data-urgency-type="purchase" style="display: none;">
+      <svg class="urgency-indicator__icon" width="20" height="20" viewBox="0 0 20 20" fill="none">
+        <path d="M9 17C13.4183 17 17 13.4183 17 9C17 4.58172 13.4183 1 9 1C4.58172 1 1 4.58172 1 9C1 13.4183 4.58172 17 9 17Z" 
+              stroke="currentColor" stroke-width="2"/>
+        <path d="M6 9L8 11L12 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      <div class="urgency-indicator__content">
+        <strong>Someone from <span class="purchase-location">New York</span> purchased this</strong>
+        <span class="purchase-time">2 minutes ago</span>
+      </div>
+    </div>
+  {%- endif -%}
+</div>
+
+<style>
+  .urgency-indicators-pod {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    margin: 1.5rem 0;
+  }
+
+  .urgency-indicator {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.875rem 1rem;
+    border-radius: 8px;
+    animation: slideInUp 0.4s ease, gradient-pulse 3s ease-in-out infinite;
+    will-change: background;
+    transform: translateZ(0);
+  }
+
+  @keyframes gradient-pulse {
+    0%, 100% {
+      opacity: 1;
+      transform: scale(1);
+    }
+    50% {
+      opacity: 0.95;
+      transform: scale(1.01);
+    }
+  }
+
+  .urgency-indicator--stock {
+    background: var(--gradient-urgency);
+    border: none;
+    color: white;
+  }
+
+  .urgency-indicator--stock .urgency-indicator__icon {
+    color: white;
+  }
+
+  .urgency-indicator--viewers {
+    background: var(--gradient-primary);
+    border: none;
+    color: white;
+    position: relative;
+  }
+
+  .urgency-indicator--purchase {
+    background: var(--gradient-success);
+    border: none;
+    color: white;
+  }
+
+  .urgency-indicator__icon {
+    flex-shrink: 0;
+    width: 20px;
+    height: 20px;
+    color: white;
+  }
+
+  .urgency-indicator__content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0.125rem;
+  }
+
+  .urgency-indicator__content strong {
+    font-size: 0.875rem;
+    font-weight: 600;
+  }
+
+  .urgency-indicator__content span {
+    font-size: 0.75rem;
+    opacity: 0.8;
+  }
+
+  .live-badge {
+    font-size: 0.625rem;
+    font-weight: 700;
+    color: rgb(239, 68, 68);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    animation: pulse 2s ease-in-out infinite;
+  }
+
+  @keyframes slideInUp {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes pulse {
+    0%, 100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.6;
+    }
+  }
+
+  @media screen and (max-width: 749px) {
+    .urgency-indicator {
+      padding: 0.75rem 0.875rem;
+    }
+
+    .urgency-indicator__content strong {
+      font-size: 0.8125rem;
+    }
+  }
+</style>
+
+<script>
+  // Animate viewer count
+  (function() {
+    const viewerElement = document.querySelector('.viewer-count');
+    if (!viewerElement) return;
+
+    const baseCount = parseInt(viewerElement.dataset.baseCount);
+    
+    function updateViewerCount() {
+      const variance = Math.floor(Math.random() * 3) - 1; // -1, 0, or 1
+      const newCount = Math.max(1, baseCount + variance);
+      viewerElement.textContent = newCount;
+    }
+
+    // Update every 8-12 seconds
+    setInterval(updateViewerCount, (8 + Math.random() * 4) * 1000);
+  })();
+
+  // Show recent purchase notification randomly
+  (function() {
+    const purchaseIndicator = document.querySelector('.urgency-indicator--purchase');
+    if (!purchaseIndicator) return;
+
+    const locations = ['New York', 'Los Angeles', 'Chicago', 'Houston', 'Miami', 'Seattle', 'Boston', 'Austin'];
+    const timeOptions = ['2 minutes', '5 minutes', '8 minutes', '12 minutes', '15 minutes'];
+
+    function showPurchaseNotification() {
+      const location = locations[Math.floor(Math.random() * locations.length)];
+      const time = timeOptions[Math.floor(Math.random() * timeOptions.length)];
+      
+      purchaseIndicator.querySelector('.purchase-location').textContent = location;
+      purchaseIndicator.querySelector('.purchase-time').textContent = time + ' ago';
+      
+      // Show notification
+      purchaseIndicator.style.display = 'flex';
+      
+      // Hide after 6 seconds
+      setTimeout(() => {
+        purchaseIndicator.style.display = 'none';
+      }, 6000);
+    }
+
+    // Show first notification after 10-20 seconds
+    setTimeout(showPurchaseNotification, (10 + Math.random() * 10) * 1000);
+    
+    // Then show every 30-60 seconds
+    setInterval(showPurchaseNotification, (30 + Math.random() * 30) * 1000);
+  })();
+</script>

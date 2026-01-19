@@ -70,6 +70,11 @@
     <div class="product product--{{ section.settings.media_size }} product--{{ section.settings.media_position }} product--{{ section.settings.gallery_layout }} product--mobile-{{ section.settings.mobile_thumbnails }} grid grid--1-col {% if product.media.size > 0 %}grid--2-col-tablet{% else %}product--no-media{% endif %}">
       <div class="grid__item product__media-wrapper{% if section.settings.media_position == 'right' %} medium-hide large-up-hide{% endif %}">
         {% render 'product-media-gallery', variant_images: variant_images %}
+        
+        {%- comment -%} POD Image Zoom Trigger {%- endcomment -%}
+        <div style="position: relative;">
+          {% render 'product-zoom-pod', product: product %}
+        </div>
       </div>
       <div class="product__info-wrapper grid__item{% if settings.page_width > 1400 and section.settings.media_size == "small" %} product__info-wrapper--extra-padding{% endif %}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
         <product-info
@@ -106,6 +111,8 @@
                     </h2>
                   </a>
                 </div>
+                {%- comment -%} POD Review Summary {%- endcomment -%}
+                {%- render 'review-summary-pod', rating: 4.8, count: 247 -%}
               {% when 'rating_stars' %}
                 {% render 'rating-stars-block', block: block, margins: true, block_attributes: true %}
               {%- when 'price' -%}
@@ -462,7 +469,14 @@
 
               {%- when 'variant_picker' -%}
                 {% render 'product-variant-picker', product: product, block: block, product_form_id: product_form_id %}
+                
+                {%- comment -%} POD Urgency Indicators - Show after variant picker {%- endcomment -%}
+                {% render 'urgency-indicators-pod', product: product, inventory_threshold: 10, show_viewers: true, show_recent_purchase: true %}
+                
               {%- when 'buy_buttons' -%}
+                {%- comment -%} POD Gift Options {%- endcomment -%}
+                {% render 'gift-options-pod', product: product %}
+                
                 {%- render 'buy-buttons',
                   block: block,
                   product: product,
@@ -470,6 +484,10 @@
                   section_id: section.id,
                   show_pickup_availability: true
                 -%}
+                {%- comment -%} POD Trust Badges {%- endcomment -%}
+                <div class="product__trust-section" {{ block.shopify_attributes }}>
+                  {% render 'trust-badges-pod' %}
+                </div>
               {%- when 'complementary' -%}
                 <product-recommendations
                   class="complementary-products quick-add-hidden no-js-hidden{% if block.settings.make_collapsible_row %} is-accordion{% endif %}{% if block.settings.enable_quick_add %} complementary-products-contains-quick-add{% endif %}"
@@ -624,6 +642,24 @@
         </div>
       {%- endif -%}
     </div>
+
+    {%- comment -%} POD Size Guide Modal {%- endcomment -%}
+    {% render 'size-guide-modal-pod' %}
+
+    {%- comment -%} POD Product Tabs {%- endcomment -%}
+    {% render 'product-tabs-pod', product: product, description: product.description %}
+
+    {%- comment -%} POD Customer Photos {%- endcomment -%}
+    {% render 'customer-photos-pod' %}
+
+    {%- comment -%} POD Cross-Sell Products {%- endcomment -%}
+    {% render 'cross-sell-products-pod', product: product, limit: 6, heading: "Available on Other Products" %}
+    
+    {%- comment -%} POD Recently Viewed Products {%- endcomment -%}
+    {% render 'recently-viewed-pod' %}
+
+    {%- comment -%} POD Sticky Add to Cart Mobile {%- endcomment -%}
+    {% render 'sticky-atc-mobile', product: product %}
 
     {% render 'product-media-modal', variant_images: variant_images %}
 

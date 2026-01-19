@@ -1,0 +1,137 @@
+/* ====================================================
+   GRADIENT BUTTON OVERRIDES
+   Extends base button styles with gradient effects
+   ==================================================== */
+
+/* Primary Button with Gradient */
+.button:not(.button--secondary):not(.button--tertiary) {
+  background: var(--gradient-primary) !important;
+  color: white !important;
+  position: relative;
+  overflow: hidden;
+}
+
+.button:not(.button--secondary):not(.button--tertiary)::before {
+  background: var(--gradient-shimmer) !important;
+  animation: shimmer 2.5s infinite;
+}
+
+.button:not(.button--secondary):not(.button--tertiary):hover::before {
+  animation-duration: 1.5s;
+}
+
+.button:not(.button--secondary):not(.button--tertiary):hover {
+  background: var(--gradient-primary-hover) !important;
+  box-shadow: 0 8px 20px rgba(99, 102, 241, 0.4) !important;
+}
+
+/* Secondary Button with Gradient Border */
+.button--secondary {
+  background: transparent !important;
+  color: rgb(219, 39, 119) !important; /* Darker pink for better contrast */
+  font-weight: 600;
+  position: relative;
+  z-index: 0;
+}
+
+.button--secondary::before {
+  content: '' !important;
+  position: absolute;
+  inset: -2px;
+  background: var(--gradient-accent) !important;
+  border-radius: inherit;
+  z-index: -1;
+  opacity: 1;
+}
+
+.button--secondary::after {
+  background: white !important;
+  z-index: 0 !important;
+}
+
+.button--secondary:hover {
+  background: var(--gradient-accent) !important;
+  color: white !important;
+}
+
+.button--secondary:hover::after {
+  opacity: 0;
+}
+
+/* Tertiary Button - Better Contrast */
+.button--tertiary {
+  color: rgb(79, 70, 229) !important; /* Darker indigo for better contrast */
+  font-weight: 600;
+}
+
+.button--tertiary:hover {
+  background: rgba(79, 70, 229, 0.1) !important;
+  color: rgb(67, 56, 202) !important; /* Even darker on hover */
+}
+
+/* Loading State */
+.button.loading {
+  opacity: 0.7;
+}
+
+/* Focus State with Gradient Ring */
+.button:focus-visible,
+.button:focus {
+  outline: 3px solid rgb(99, 102, 241) !important;
+  outline-offset: 3px !important;
+  box-shadow: 0 0 0 6px rgba(99, 102, 241, 0.2) !important;
+}
+
+/* Disabled State */
+.button:disabled,
+.button[aria-disabled='true'],
+.button.disabled {
+  background: rgba(var(--color-foreground), 0.1) !important;
+  color: rgba(var(--color-foreground), 0.3) !important;
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.button:disabled::before,
+.button[aria-disabled='true']::before {
+  display: none;
+}
+
+/* Mobile Optimization */
+@media screen and (max-width: 749px) {
+  .button:not(.button--secondary):not(.button--tertiary) {
+    min-height: 48px;
+  }
+  
+  .button:not(.button--secondary):not(.button--tertiary):active {
+    transform: scale(0.98);
+  }
+  
+  /* Simplify shimmer on mobile */
+  .button:not(.button--secondary):not(.button--tertiary)::before {
+    animation-duration: 4s;
+  }
+}
+
+/* Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  .button::before {
+    animation: none !important;
+  }
+  
+  .button:hover {
+    transform: none !important;
+  }
+}
+
+/* High Contrast Mode */
+@media (prefers-contrast: high) {
+  .button:not(.button--secondary):not(.button--tertiary) {
+    background: rgb(99, 102, 241) !important;
+    border: 2px solid white !important;
+  }
+  
+  .button--secondary {
+    border: 2px solid rgb(236, 72, 153) !important;
+  }
+}
