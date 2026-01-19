@@ -464,6 +464,10 @@
 
               {%- when 'variant_picker' -%}
                 {% render 'product-variant-picker', product: product, block: block, product_form_id: product_form_id %}
+                
+                {%- comment -%} POD Urgency Indicators - Show after variant picker {%- endcomment -%}
+                {% render 'urgency-indicators-pod', product: product, inventory_threshold: 10, show_viewers: true, show_recent_purchase: true %}
+                
               {%- when 'buy_buttons' -%}
                 {%- render 'buy-buttons',
                   block: block,
@@ -639,6 +643,9 @@
 
     {%- comment -%} POD Customer Photos {%- endcomment -%}
     {% render 'customer-photos-pod' %}
+
+    {%- comment -%} POD Cross-Sell Products {%- endcomment -%}
+    {% render 'cross-sell-products-pod', product: product, limit: 6, heading: "Available on Other Products" %}
 
     {%- comment -%} POD Sticky Add to Cart Mobile {%- endcomment -%}
     {% render 'sticky-atc-mobile', product: product %}
