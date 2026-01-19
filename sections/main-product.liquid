@@ -106,6 +106,8 @@
                     </h2>
                   </a>
                 </div>
+                {%- comment -%} POD Review Summary {%- endcomment -%}
+                {%- render 'review-summary-pod', rating: 4.8, count: 247 -%}
               {% when 'rating_stars' %}
                 {% render 'rating-stars-block', block: block, margins: true, block_attributes: true %}
               {%- when 'price' -%}
