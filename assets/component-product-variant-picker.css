@@ -33,6 +33,32 @@ variant-selects {
   letter-spacing: 0.05em;
 }
 
+.size-guide-trigger {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  font-size: 13px;
+  font-weight: 500;
+  color: rgb(99, 102, 241);
+  text-transform: none;
+  letter-spacing: 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+}
+
+.size-guide-trigger:hover {
+  background-color: rgba(99, 102, 241, 0.08);
+  text-decoration: underline;
+}
+
+.size-guide-trigger svg {
+  flex-shrink: 0;
+}
+
 .product-form__input input[type='radio'] {
   clip: rect(0, 0, 0, 0);
   overflow: hidden;
