@@ -637,6 +637,9 @@
     {%- comment -%} POD Product Tabs {%- endcomment -%}
     {% render 'product-tabs-pod', product: product, description: product.description %}
 
+    {%- comment -%} POD Sticky Add to Cart Mobile {%- endcomment -%}
+    {% render 'sticky-atc-mobile', product: product %}
+
     {% render 'product-media-modal', variant_images: variant_images %}
 
     {% assign popups = section.blocks | where: 'type', 'popup' %}
