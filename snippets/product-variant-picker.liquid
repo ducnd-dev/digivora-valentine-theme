@@ -52,6 +52,7 @@
         <fieldset class="js product-form__input product-form__input--pill">
           <legend class="form__label">
             {{ option.name }}
+            {%- comment -%} Size Guide button disabled - Using Printful's size guide
             {%- if option.name == 'Size' or option.name contains 'size' -%}
               <button type="button" class="size-guide-trigger link" onclick="document.getElementById('SizeGuideModal').show()">
                 <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
@@ -61,6 +62,7 @@
                 Size Guide
               </button>
             {%- endif -%}
+            {%- endcomment -%}
           </legend>
           {% render 'product-variant-options',
             product: product,
