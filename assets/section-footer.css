@@ -345,6 +345,14 @@
 .copyright__content a {
   color: rgba(var(--color-foreground), 0.85);
   font-weight: 500;
+  background: none !important; /* Remove any background boxes */
+  padding: 0.5rem 0 !important; /* Clean padding */
+  display: block;
+}
+
+.footer-block__details-content .list-menu__item {
+  background: none !important;
+  padding: 0 !important;
 }
 
 .footer-block__details-content .list-menu__item--active {
