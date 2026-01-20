@@ -203,16 +203,42 @@ document.addEventListener('DOMContentLoaded', function() {
   {% for i in (1..4) %}
     {% assign heading = 'option' | append: i | append: '_heading' %}
     {% assign quantity = 'option' | append: i | append: '_quantity' %}
-    {% assign price = 'option' | append: i | append: '_price' %}
-    {% assign compare_at_price = 'option' | append: i | append: '_compare_at_price' %}
-
-    {% assign saved_amount = block.settings[compare_at_price] | minus: block.settings[price] %}
+    {% assign price_setting = 'option' | append: i | append: '_price' %}
+    {% assign compare_setting = 'option' | append: i | append: '_compare_at_price' %}
 
     {% if block.settings[heading] != blank %}
+      {% comment %} Use product price if settings are not configured {% endcomment %}
+      {% if block.settings[price_setting] == blank %}
+        {% assign base_price = product.price | divided_by: 100.0 %}
+        {% assign qty = block.settings[quantity] | times: 1.0 %}
+        
+        {% comment %} Auto calculate discount based on quantity {% endcomment %}
+        {% if qty == 1 %}
+          {% assign discount_percent = 0 %}
+        {% elsif qty == 2 %}
+          {% assign discount_percent = 9 %}
+        {% elsif qty == 3 %}
+          {% assign discount_percent = 13 %}
+        {% elsif qty >= 4 %}
+          {% assign discount_percent = 16 %}
+        {% endif %}
+        
+        {% assign discounted_unit = base_price | times: 100 | minus: discount_percent | divided_by: 100 %}
+        {% assign final_total = discounted_unit | times: qty | times: 100 %}
+        {% assign regular_total = base_price | times: qty | times: 100 %}
+        {% assign saved = regular_total | minus: final_total %}
+      {% else %}
+        {% comment %} Use manual settings if provided {% endcomment %}
+        {% assign final_total = block.settings[price_setting] | times: 100 %}
+        {% assign regular_total = block.settings[compare_setting] | times: 100 %}
+        {% assign saved = regular_total | minus: final_total %}
+        {% assign discounted_unit = final_total | divided_by: block.settings[quantity] | divided_by: 100 %}
+      {% endif %}
+
       <div
         class="quantity-option {% if forloop.first %}active{% endif %}"
         data-quantity="{{ block.settings[quantity] }}"
-        data-price="{{ block.settings[price] }}"
+        data-price="{{ discounted_unit }}"
       >
         {% if block.settings.most_popular == block.settings[heading] %}
           <span class="most-popular">MOST POPULAR</span>
@@ -228,16 +254,18 @@ document.addEventListener('DOMContentLoaded', function() {
         <label for="option{{ i }}">
           <div>
             <h3>{{ block.settings[heading] }}</h3>
-            <p>You save {{ saved_amount | times: 100 | money }}</p>
+            <p>You save {{ saved | money }}</p>
           </div>
 
           <div>
             <p>
-              <strong>{{ block.settings[price] | times: 100 | money }}</strong>
+              <strong>{{ final_total | money }}</strong>
             </p>
-            <p>
-              <strike>{{ block.settings[compare_at_price] | times: 100 | money }}</strike>
-            </p>
+            {% if saved > 0 %}
+              <p>
+                <strike>{{ regular_total | money }}</strike>
+              </p>
+            {% endif %}
           </div>
         </label>
       </div>
