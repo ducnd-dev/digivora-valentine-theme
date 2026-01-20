@@ -498,9 +498,11 @@
 }
 
 /* ========================================
-   Dark Mode Support (Optional)
+   Dark Mode Support - DISABLED
+   Dark mode causes text visibility issues on cards
    ======================================== */
 
+/* Commented out to prevent text visibility issues
 @media (prefers-color-scheme: dark) {
   :root {
     --gradient-neutral: linear-gradient(135deg, #1F2937 0%, #111827 100%);
@@ -515,6 +517,7 @@
     background: var(--gradient-neutral);
   }
 }
+*/
 
 /* ========================================
    Performance Optimization
