@@ -1,7 +1,17 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "current": {
-    "logo": "shopify://shop_images/digivora_logo.png",
+    "logo": "shopify://shop_images/Untitled_design_4.png",
     "logo_width": 180,
+    "favicon": "shopify://shop_images/Untitled_40_x_40_px.png",
     "type_header_font": "madera_n8",
     "heading_scale": 100,
     "type_body_font": "fs_koopman_n4",
@@ -14,11 +24,11 @@
     "animations_hover_elements": "none",
     "buttons_border_thickness": 1,
     "buttons_border_opacity": 100,
-    "buttons_radius": 8,
-    "buttons_shadow_opacity": 10,
+    "buttons_radius": 6,
+    "buttons_shadow_opacity": 0,
     "buttons_shadow_horizontal_offset": 0,
     "buttons_shadow_vertical_offset": 4,
-    "buttons_shadow_blur": 8,
+    "buttons_shadow_blur": 5,
     "variant_pills_border_thickness": 1,
     "variant_pills_border_opacity": 55,
     "variant_pills_radius": 40,
@@ -98,7 +108,7 @@
     "sale_badge_color_scheme": "scheme-3",
     "sold_out_badge_color_scheme": "scheme-3",
     "brand_headline": "Digivora",
-    "brand_description": "<p>Premium quality prints on demand. Custom designs, eco-friendly materials, fast delivery.</p>",
+    "brand_description": "<p>We create & curate amazing products at amazing prices that you can’t find anywhere else.</p>",
     "brand_image_width": 100,
     "social_facebook_link": "",
     "social_instagram_link": "",
@@ -118,11 +128,11 @@
     "cart_type": "drawer",
     "cart_drawer_collection": "",
     "cart_color_scheme": "scheme-1",
-    "free_shipping_message": "Only $[amount] more for FREE shipping!",
-    "progress": "#6366F1",
+    "free_shipping_message": "💝 Only $[amount] more for FREE Valentine's shipping!",
+    "progress": "#8472ed",
     "cart_countdown_time": 4,
     "enable_cart_discount": false,
-    "enable_cart_countdown": false,
+    "enable_cart_countdown": true,
     "enable_cart_progress": true,
     "free_shipping_color_scheme": "scheme-5",
     "sections": {
@@ -144,26 +154,26 @@
           "countdown_kNDGYw": {
             "type": "countdown",
             "settings": {
-              "background_color": "#6366F1",
+              "background_color": "#000000",
               "text_color": "#ffffff",
               "cart_countdown_time": 4,
-              "cart_countdown_title": "\u23f0 Cart expires in"
+              "cart_countdown_title": "⏰ Valentine's cart expires in"
             }
           },
           "free_shipping_bar_BKaxQd": {
             "type": "free_shipping_bar",
             "settings": {
-              "progress": "#6366F1",
+              "progress": "#e63946",
               "free_shipping_goal": 50,
-              "free_shipping_message": "Only [amount] away from FREE shipping!",
-              "free_shipping_success_message": "\ud83c\udf89 You unlocked FREE shipping!"
+              "free_shipping_message": "💝 Only [amount] away from FREE Valentine's shipping!",
+              "free_shipping_success_message": "🎉 Yay! You unlocked FREE shipping! Order by Feb 10 for Valentine's delivery!"
             }
           },
           "product_upsell_r7WBnf": {
             "type": "product_upsell",
             "settings": {
-              "upsell_title": "You Might Also Like",
-              "button_color": "#6366F1",
+              "upsell_title": "❤️ Complete Your Valentine's Set",
+              "button_color": "#e63946",
               "button_label_color": "#ffffff",
               "upsell_products": [
                 "5-in-1-hairstyler-pro",
@@ -184,12 +194,12 @@
             "type": "social_proof",
             "settings": {
               "enable_rating_stars": true,
-              "star_color": "#F59E0B",
+              "star_color": "#ffb800",
               "bg_star_color": "#ececec",
               "rating": 4.8,
               "bg_stars_style": "full",
               "justify_content": "center",
-              "social_proof_title": "\u2b50 Loved by 15,000+ Customers"
+              "social_proof_title": "❤️ Loved by 1,300+ Happy Couples"
             }
           }
         },
@@ -209,60 +219,87 @@
       }
     },
     "content_for_index": [],
+    "blocks": {
+      "15683396631634586217": {
+        "type": "shopify://apps/inbox/blocks/chat/841fc607-4181-4ad1-842d-e24d7f8bad6b",
+        "disabled": false,
+        "settings": {
+          "button_color": "#000000",
+          "secondary_color": "#FFFFFF",
+          "ternary_color": "#6A6A6A",
+          "button_icon": "chat_bubble",
+          "button_text": "chat_with_us",
+          "button_horizontal_position": "bottom_right",
+          "button_vertical_position": "lowest",
+          "greeting_message": ""
+        }
+      }
+    },
     "color_schemes": {
       "scheme-1": {
         "settings": {
           "background": "#ffffff",
-          "background_gradient": "linear-gradient(135deg, #F9FAFB 0%, #FFFFFF 100%)",
-          "text": "#1F2937",
-          "button": "#6366F1",
+          "background_gradient": "linear-gradient(135deg, #FFF1F3 0%, #FFE5E9 100%)",
+          "text": "#2b2d42",
+          "button": "#e63946",
           "button_label": "#ffffff",
-          "secondary_button_label": "#6366F1",
-          "shadow": "#1F2937"
+          "secondary_button_label": "#e63946",
+          "shadow": "#1a1a2e"
         }
       },
       "scheme-2": {
         "settings": {
-          "background": "#F9FAFB",
-          "background_gradient": "linear-gradient(160deg, #EEF2FF 0%, #F9FAFB 50%, #FFFFFF 100%)",
-          "text": "#1F2937",
-          "button": "#EC4899",
+          "background": "#fff8f9",
+          "background_gradient": "linear-gradient(160deg, #FFD6E0 0%, #FFF1F3 50%, #FFFFFF 100%)",
+          "text": "#2b2d42",
+          "button": "#c9184a",
           "button_label": "#ffffff",
-          "secondary_button_label": "#EC4899",
-          "shadow": "#1F2937"
+          "secondary_button_label": "#c9184a",
+          "shadow": "#a4133c"
         }
       },
       "scheme-3": {
         "settings": {
           "background": "#ffffff",
-          "background_gradient": "linear-gradient(45deg, #FDF4FF 0%, #FCE7F3 50%, #FFF1F2 100%)",
-          "text": "#1F2937",
-          "button": "#10B981",
+          "background_gradient": "linear-gradient(45deg, #FFCCD5 0%, #FFE5EA 50%, #FFF5F7 100%)",
+          "text": "#2b2d42",
+          "button": "#ff006e",
           "button_label": "#ffffff",
-          "secondary_button_label": "#10B981",
-          "shadow": "#1F2937"
+          "secondary_button_label": "#ff006e",
+          "shadow": "#c9184a"
         }
       },
       "scheme-4": {
         "settings": {
-          "background": "#1F2937",
-          "background_gradient": "linear-gradient(135deg, #1F2937 0%, #374151 50%, #4B5563 100%)",
-          "text": "#F9FAFB",
-          "button": "#6366F1",
-          "button_label": "#ffffff",
-          "secondary_button_label": "#6366F1",
-          "shadow": "#111827"
+          "background": "#2b2d42",
+          "background_gradient": "linear-gradient(135deg, #2B2D42 0%, #3A3D5C 50%, #4A4D70 100%)",
+          "text": "#ffb3c1",
+          "button": "#ffb3c1",
+          "button_label": "#2b2d42",
+          "secondary_button_label": "#ffb3c1",
+          "shadow": "#1a1a2e"
         }
       },
       "scheme-5": {
         "settings": {
-          "background": "#EEF2FF",
-          "background_gradient": "linear-gradient(180deg, #EEF2FF 0%, #F5F3FF 50%, #FCE7F3 100%)",
-          "text": "#1F2937",
-          "button": "#8B5CF6",
+          "background": "#fff8f0",
+          "background_gradient": "linear-gradient(180deg, #FFE5E9 0%, #FFF0F2 50%, #FFF8F9 100%)",
+          "text": "#2b2d42",
+          "button": "#d90429",
           "button_label": "#ffffff",
-          "secondary_button_label": "#8B5CF6",
-          "shadow": "#1F2937"
+          "secondary_button_label": "#d90429",
+          "shadow": "#a4133c"
+        }
+      },
+      "scheme-e0c80b90-a5af-4cbd-9aa9-5c3f81303d9a": {
+        "settings": {
+          "background": "#3d431c",
+          "background_gradient": "",
+          "text": "#ffffff",
+          "button": "#121212",
+          "button_label": "#ffffff",
+          "secondary_button_label": "#121212",
+          "shadow": "#121212"
         }
       }
     }
