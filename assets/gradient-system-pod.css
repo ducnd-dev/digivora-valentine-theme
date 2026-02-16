@@ -18,9 +18,13 @@
   --gradient-accent: linear-gradient(135deg, #EC4899 0%, #F472B6 100%);
   --gradient-accent-hover: linear-gradient(135deg, #DB2777 0%, #EC4899 100%);
   
-  /* Valentine Special (Seasonal Campaigns) */
+  /* Valentine Special (Seasonal Campaigns) - kept for reference */
   --gradient-valentine: linear-gradient(135deg, #EC4899 0%, #F472B6 50%, #FBBF24 100%);
   --gradient-valentine-subtle: linear-gradient(135deg, rgba(236, 72, 153, 0.1) 0%, rgba(244, 114, 182, 0.05) 100%);
+  
+  /* Nurse Coffee (Primary theme - ấm áp, tin cậy) */
+  --gradient-nurse-coffee: linear-gradient(135deg, #5BA392 0%, #7EC8A3 50%, #99D4C4 100%);
+  --gradient-nurse-coffee-subtle: linear-gradient(135deg, rgba(91, 163, 146, 0.12) 0%, rgba(126, 200, 163, 0.06) 100%);
   
   /* Neutral Elegant (Backgrounds, Cards) */
   --gradient-neutral: linear-gradient(135deg, #F9FAFB 0%, #FFFFFF 100%);
@@ -68,6 +72,14 @@
 
 .bg-gradient-valentine {
   background: var(--gradient-valentine);
+}
+
+.bg-gradient-nurse-coffee {
+  background: var(--gradient-nurse-coffee);
+}
+
+.bg-gradient-nurse-coffee-subtle {
+  background: var(--gradient-nurse-coffee-subtle);
 }
 
 .bg-gradient-neutral {
@@ -131,6 +143,20 @@
 @supports not (-webkit-background-clip: text) {
   .gradient-text-valentine {
     color: #EC4899;
+  }
+}
+
+.gradient-text-nurse-coffee {
+  background: var(--gradient-nurse-coffee);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-weight: 700;
+}
+
+@supports not (-webkit-background-clip: text) {
+  .gradient-text-nurse-coffee {
+    color: #5BA392;
   }
 }
 
@@ -200,6 +226,10 @@
 
 .gradient-border-valentine::before {
   background: var(--gradient-valentine);
+}
+
+.gradient-border-nurse-coffee::before {
+  background: var(--gradient-nurse-coffee);
 }
 
 /* ========================================
@@ -300,9 +330,9 @@
 }
 
 .card-gradient-hover:hover {
-  background: var(--gradient-valentine-subtle);
+  background: var(--gradient-nurse-coffee-subtle);
   transform: translateY(-4px);
-  box-shadow: 0 12px 24px rgba(236, 72, 153, 0.15);
+  box-shadow: 0 12px 24px rgba(91, 163, 146, 0.15);
 }
 
 /* ========================================
@@ -328,7 +358,7 @@
 }
 
 .badge-gradient-featured {
-  background: var(--gradient-valentine);
+  background: var(--gradient-nurse-coffee);
   color: white;
   font-weight: 700;
   padding: 0.25rem 0.75rem;

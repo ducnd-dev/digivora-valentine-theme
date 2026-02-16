@@ -128,8 +128,8 @@
     "cart_type": "drawer",
     "cart_drawer_collection": "",
     "cart_color_scheme": "scheme-1",
-    "free_shipping_message": "💝 Only $[amount] more for FREE Valentine's shipping!",
-    "progress": "#8472ed",
+    "free_shipping_message": "☕ Add $[amount] more for FREE shipping!",
+    "progress": "#5BA392",
     "cart_countdown_time": 4,
     "enable_cart_discount": false,
     "enable_cart_countdown": true,
@@ -157,23 +157,23 @@
               "background_color": "#000000",
               "text_color": "#ffffff",
               "cart_countdown_time": 4,
-              "cart_countdown_title": "⏰ Valentine's cart expires in"
+              "cart_countdown_title": "⏰ Your cart is held for"
             }
           },
           "free_shipping_bar_BKaxQd": {
             "type": "free_shipping_bar",
             "settings": {
-              "progress": "#e63946",
+              "progress": "#5BA392",
               "free_shipping_goal": 50,
-              "free_shipping_message": "💝 Only [amount] away from FREE Valentine's shipping!",
-              "free_shipping_success_message": "🎉 Yay! You unlocked FREE shipping! Order by Feb 10 for Valentine's delivery!"
+              "free_shipping_message": "☕ Only [amount] away from FREE shipping!",
+              "free_shipping_success_message": "🎉 You've unlocked FREE shipping! Thank you for your order."
             }
           },
           "product_upsell_r7WBnf": {
             "type": "product_upsell",
             "settings": {
-              "upsell_title": "❤️ Complete Your Valentine's Set",
-              "button_color": "#e63946",
+              "upsell_title": "☕ Add more for your coffee break",
+              "button_color": "#5BA392",
               "button_label_color": "#ffffff",
               "upsell_products": [
                 "5-in-1-hairstyler-pro",
@@ -199,7 +199,7 @@
               "rating": 4.8,
               "bg_stars_style": "full",
               "justify_content": "center",
-              "social_proof_title": "❤️ Loved by 1,300+ Happy Couples"
+              "social_proof_title": "☕ Loved by 1,300+ nurses & healthcare pros"
             }
           }
         },
@@ -238,57 +238,57 @@
     "color_schemes": {
       "scheme-1": {
         "settings": {
-          "background": "#ffffff",
-          "background_gradient": "linear-gradient(135deg, #FFF1F3 0%, #FFE5E9 100%)",
-          "text": "#2b2d42",
-          "button": "#e63946",
-          "button_label": "#ffffff",
-          "secondary_button_label": "#e63946",
-          "shadow": "#1a1a2e"
+          "background": "#FFFFFF",
+          "background_gradient": "linear-gradient(135deg, #F0F9F6 0%, #E8F5F0 50%, #FFFFFF 100%)",
+          "text": "#2D3E3A",
+          "button": "#5BA392",
+          "button_label": "#FFFFFF",
+          "secondary_button_label": "#5BA392",
+          "shadow": "#2D3E3A"
         }
       },
       "scheme-2": {
         "settings": {
-          "background": "#fff8f9",
-          "background_gradient": "linear-gradient(160deg, #FFD6E0 0%, #FFF1F3 50%, #FFFFFF 100%)",
-          "text": "#2b2d42",
-          "button": "#c9184a",
-          "button_label": "#ffffff",
-          "secondary_button_label": "#c9184a",
-          "shadow": "#a4133c"
+          "background": "#FFF8F5",
+          "background_gradient": "linear-gradient(160deg, #E8F5F0 0%, #FFF8F5 50%, #FFFFFF 100%)",
+          "text": "#3D524E",
+          "button": "#7EC8A3",
+          "button_label": "#FFFFFF",
+          "secondary_button_label": "#7EC8A3",
+          "shadow": "#3D524E"
         }
       },
       "scheme-3": {
         "settings": {
-          "background": "#ffffff",
-          "background_gradient": "linear-gradient(45deg, #FFCCD5 0%, #FFE5EA 50%, #FFF5F7 100%)",
-          "text": "#2b2d42",
-          "button": "#ff006e",
-          "button_label": "#ffffff",
-          "secondary_button_label": "#ff006e",
-          "shadow": "#c9184a"
+          "background": "#FFFFFF",
+          "background_gradient": "linear-gradient(45deg, #D4EDE4 0%, #E8F5F0 50%, #F5FAF8 100%)",
+          "text": "#2D3E3A",
+          "button": "#6BB39B",
+          "button_label": "#FFFFFF",
+          "secondary_button_label": "#6BB39B",
+          "shadow": "#3D524E"
         }
       },
       "scheme-4": {
         "settings": {
-          "background": "#2b2d42",
-          "background_gradient": "linear-gradient(135deg, #2B2D42 0%, #3A3D5C 50%, #4A4D70 100%)",
-          "text": "#ffb3c1",
-          "button": "#ffb3c1",
-          "button_label": "#2b2d42",
-          "secondary_button_label": "#ffb3c1",
-          "shadow": "#1a1a2e"
+          "background": "#2D3E3A",
+          "background_gradient": "linear-gradient(135deg, #2D3E3A 0%, #3D524E 50%, #4A635C 100%)",
+          "text": "#E8F5F0",
+          "button": "#7EC8A3",
+          "button_label": "#2D3E3A",
+          "secondary_button_label": "#7EC8A3",
+          "shadow": "#1A2522"
         }
       },
       "scheme-5": {
         "settings": {
-          "background": "#fff8f0",
-          "background_gradient": "linear-gradient(180deg, #FFE5E9 0%, #FFF0F2 50%, #FFF8F9 100%)",
-          "text": "#2b2d42",
-          "button": "#d90429",
-          "button_label": "#ffffff",
-          "secondary_button_label": "#d90429",
-          "shadow": "#a4133c"
+          "background": "#F5FAF8",
+          "background_gradient": "linear-gradient(180deg, #E8F5F0 0%, #F0F9F6 50%, #FFF8F5 100%)",
+          "text": "#2D3E3A",
+          "button": "#5BA392",
+          "button_label": "#FFFFFF",
+          "secondary_button_label": "#5BA392",
+          "shadow": "#3D524E"
         }
       },
       "scheme-e0c80b90-a5af-4cbd-9aa9-5c3f81303d9a": {

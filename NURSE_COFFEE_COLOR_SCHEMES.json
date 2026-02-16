@@ -1,0 +1,69 @@
+{
+  "description": "Bảng màu Nurse Coffee - ấm áp, tin cậy, thư giãn. Copy vào config/settings_data.json > current > color_schemes",
+  "color_schemes": {
+    "scheme-1": {
+      "settings": {
+        "background": "#FFFFFF",
+        "background_gradient": "linear-gradient(135deg, #F0F9F6 0%, #E8F5F0 50%, #FFFFFF 100%)",
+        "text": "#2D3E3A",
+        "button": "#5BA392",
+        "button_label": "#FFFFFF",
+        "secondary_button_label": "#5BA392",
+        "shadow": "#2D3E3A"
+      }
+    },
+    "scheme-2": {
+      "settings": {
+        "background": "#FFF8F5",
+        "background_gradient": "linear-gradient(160deg, #E8F5F0 0%, #FFF8F5 50%, #FFFFFF 100%)",
+        "text": "#3D524E",
+        "button": "#7EC8A3",
+        "button_label": "#FFFFFF",
+        "secondary_button_label": "#7EC8A3",
+        "shadow": "#3D524E"
+      }
+    },
+    "scheme-3": {
+      "settings": {
+        "background": "#FFFFFF",
+        "background_gradient": "linear-gradient(45deg, #D4EDE4 0%, #E8F5F0 50%, #F5FAF8 100%)",
+        "text": "#2D3E3A",
+        "button": "#6BB39B",
+        "button_label": "#FFFFFF",
+        "secondary_button_label": "#6BB39B",
+        "shadow": "#3D524E"
+      }
+    },
+    "scheme-4": {
+      "settings": {
+        "background": "#2D3E3A",
+        "background_gradient": "linear-gradient(135deg, #2D3E3A 0%, #3D524E 50%, #4A635C 100%)",
+        "text": "#E8F5F0",
+        "button": "#7EC8A3",
+        "button_label": "#2D3E3A",
+        "secondary_button_label": "#7EC8A3",
+        "shadow": "#1A2522"
+      }
+    },
+    "scheme-5": {
+      "settings": {
+        "background": "#F5FAF8",
+        "background_gradient": "linear-gradient(180deg, #E8F5F0 0%, #F0F9F6 50%, #FFF8F5 100%)",
+        "text": "#2D3E3A",
+        "button": "#5BA392",
+        "button_label": "#FFFFFF",
+        "secondary_button_label": "#5BA392",
+        "shadow": "#3D524E"
+      }
+    }
+  },
+  "recommended_cart_updates": {
+    "progress": "#5BA392",
+    "free_shipping_message": "☕ Add $[amount] more for FREE shipping!",
+    "countdown_title": "⏰ Your cart is held for",
+    "free_shipping_bar_message": "☕ Only [amount] away from FREE shipping!",
+    "free_shipping_success_message": "🎉 You've unlocked FREE shipping! Thank you for your order.",
+    "upsell_title": "☕ Add more for your coffee break",
+    "social_proof_title": "☕ Loved by 1,300+ nurses & healthcare pros"
+  }
+}

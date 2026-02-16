@@ -63,7 +63,7 @@
 
 .card--card:hover,
 .card--standard:hover .card__inner {
-  background: var(--gradient-valentine-subtle);
+  background: var(--gradient-nurse-coffee-subtle);
   border-color: rgba(236, 72, 153, 0.2);
 }
 

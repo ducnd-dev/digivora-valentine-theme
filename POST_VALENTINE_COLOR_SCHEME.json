@@ -1,0 +1,100 @@
+{
+  "note": "🎨 POST-VALENTINE COLOR SCHEME - Áp dụng sau ngày 15/2/2026",
+  "description": "Modern & Professional theme - Phù hợp cho POD store đa dạng sản phẩm, tạo cảm giác professional và trustworthy",
+  "application_date": "February 15, 2026",
+  "instructions": "Copy các color_schemes này vào config/settings_data.json > current > color_schemes sau Valentine",
+  
+  "color_schemes": {
+    "scheme-1": {
+      "name": "Light & Clean (Primary)",
+      "usage": "Header, Footer, Product cards, Main sections",
+      "settings": {
+        "background": "#FFFFFF",
+        "background_gradient": "linear-gradient(135deg, #F8F9FA 0%, #FFFFFF 100%)",
+        "text": "#1A1A1A",
+        "button": "#2563EB",
+        "button_label": "#FFFFFF",
+        "secondary_button_label": "#2563EB",
+        "shadow": "#1A1A1A"
+      }
+    },
+    "scheme-2": {
+      "name": "Soft Gray Background",
+      "usage": "Alternating sections, Collection banners, Newsletter",
+      "settings": {
+        "background": "#F8F9FA",
+        "background_gradient": "linear-gradient(160deg, #EFF6FF 0%, #F8F9FA 50%, #FFFFFF 100%)",
+        "text": "#374151",
+        "button": "#1D4ED8",
+        "button_label": "#FFFFFF",
+        "secondary_button_label": "#1D4ED8",
+        "shadow": "#374151"
+      }
+    },
+    "scheme-3": {
+      "name": "Dark Mode Accent",
+      "usage": "Sale badges, Dark sections, Contrast elements",
+      "settings": {
+        "background": "#1F2937",
+        "background_gradient": "linear-gradient(135deg, #1F2937 0%, #374151 100%)",
+        "text": "#F9FAFB",
+        "button": "#3B82F6",
+        "button_label": "#FFFFFF",
+        "secondary_button_label": "#3B82F6",
+        "shadow": "#000000"
+      }
+    },
+    "scheme-4": {
+      "name": "Pure Dark",
+      "usage": "Footer, Mega menu backgrounds",
+      "settings": {
+        "background": "#111827",
+        "background_gradient": "linear-gradient(135deg, #111827 0%, #1F2937 100%)",
+        "text": "#F3F4F6",
+        "button": "#60A5FA",
+        "button_label": "#111827",
+        "secondary_button_label": "#60A5FA",
+        "shadow": "#000000"
+      }
+    },
+    "scheme-5": {
+      "name": "Accent Blue",
+      "usage": "CTA sections, Promotional banners",
+      "settings": {
+        "background": "#EFF6FF",
+        "background_gradient": "linear-gradient(180deg, #DBEAFE 0%, #EFF6FF 50%, #F9FAFB 100%)",
+        "text": "#1E3A8A",
+        "button": "#1D4ED8",
+        "button_label": "#FFFFFF",
+        "secondary_button_label": "#1D4ED8",
+        "shadow": "#1E40AF"
+      }
+    }
+  },
+
+  "recommended_updates": {
+    "free_shipping_message": "🚚 Free shipping on orders over $[amount]!",
+    "progress": "#2563EB",
+    "cart_drawer_blocks": {
+      "countdown_title": "⏰ Your cart expires in",
+      "free_shipping_message": "🚚 Only [amount] away from FREE shipping!",
+      "free_shipping_success_message": "🎉 Yay! You unlocked FREE shipping!"
+    }
+  },
+
+  "color_psychology": {
+    "blue": "Trust, reliability, professionalism - Perfect for e-commerce",
+    "gray": "Neutral, sophisticated, modern - Good for product focus",
+    "white": "Clean, minimal, spacious - Enhances product imagery"
+  },
+
+  "migration_checklist": [
+    "✅ Backup current settings_data.json",
+    "✅ Copy color_schemes from this file to settings_data.json",
+    "✅ Update free_shipping_message (remove Valentine references)",
+    "✅ Update cart countdown title (remove Valentine theme)",
+    "✅ Check all section color_scheme assignments",
+    "✅ Test on staging first",
+    "✅ Clear browser cache after deployment"
+  ]
+}

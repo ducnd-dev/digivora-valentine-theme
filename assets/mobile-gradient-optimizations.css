@@ -106,7 +106,7 @@
   .card-wrapper:active .card,
   .trust-badge:active,
   .gift-option__card:active {
-    background: var(--gradient-valentine-subtle);
+    background: var(--gradient-nurse-coffee-subtle);
   }
 
   /* Simplify button shimmer on mobile */
@@ -310,7 +310,8 @@
   /* Ensure gradient text is readable on small screens */
   .gradient-text-primary,
   .gradient-text-accent,
-  .gradient-text-valentine {
+  .gradient-text-valentine,
+  .gradient-text-nurse-coffee {
     /* Add subtle shadow for better readability */
     text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
     
@@ -319,8 +320,8 @@
   }
 
   .hero-pod__heading--gradient {
-    /* Simplify animated gradient on mobile */
-    background: linear-gradient(135deg, #6366F1 0%, #EC4899 100%);
+    /* Simplify gradient on mobile - Nurse Coffee */
+    background: linear-gradient(135deg, #5BA392 0%, #7EC8A3 100%);
     background-size: 100% auto; /* No animation scroll */
     animation: none;
   }
